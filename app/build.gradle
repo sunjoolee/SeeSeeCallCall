@@ -5,12 +5,11 @@ plugins {
 
 android {
     namespace 'com.sparta.seeseecallcall'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.sparta.seeseecallcall"
         minSdk 26
-        targetSdk 33
         versionCode 1
         versionName "1.0"
 
