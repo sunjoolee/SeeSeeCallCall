@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sparta.seeseecallcall.MainActivity.Companion.contactBookmarkList
-import com.sparta.seeseecallcall.MainActivity.Companion.contactList
+import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
+import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
@@ -21,7 +22,7 @@ class ContactListFragment : Fragment() {
     ): View? {
         val binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-        val adapter = MyAdapter(contactList)
+        val adapter = MyAdapter(ContactManager.contactList)
         binding.recyclerviewList.adapter = adapter
         binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
 

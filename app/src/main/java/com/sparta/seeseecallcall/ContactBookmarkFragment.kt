@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sparta.seeseecallcall.MainActivity.Companion.contactBookmarkList
-import com.sparta.seeseecallcall.MainActivity.Companion.contactList
-import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
+import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
