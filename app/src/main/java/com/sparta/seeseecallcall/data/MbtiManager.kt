@@ -3,11 +3,9 @@ package com.sparta.seeseecallcall.data
 import com.sparta.seeseecallcall.R
 
 object MbtiManager {
-    val id: Map<String, Int> = getId()
-    val defaultImage: List<Int> = getDefaultmage()
-    val compatibilityColor: List<List<CompatibilityColor>> = getCompatibilityColor()
-
-    private fun getId(): Map<String, Int> = mapOf(
+    val mbtiId: Map<String, Int> = initMbtiId()
+    val compatibilityColor: List<List<CompatibilityColor>> = initCompatibilityColor()
+    private fun initMbtiId(): Map<String, Int> = mapOf(
         "INFP" to 0,
         "ENFP" to 1,
         "INFJ" to 2,
@@ -26,26 +24,7 @@ object MbtiManager {
         "ESTJ" to 15
     )
 
-    private fun getDefaultmage(): List<Int> = listOf(
-        R.drawable.profile_infp,
-        R.drawable.profile_enfp,
-        R.drawable.profile_infj,
-        R.drawable.profile_enfj,
-        R.drawable.profile_intj,
-        R.drawable.profile_entj,
-        R.drawable.profile_intp,
-        R.drawable.profile_entp,
-        R.drawable.profile_isfp,
-        R.drawable.profile_esfp,
-        R.drawable.profile_istp,
-        R.drawable.profile_estp,
-        R.drawable.profile_isfj,
-        R.drawable.profile_esfj,
-        R.drawable.profile_istj,
-        R.drawable.profile_estj
-    )
-
-    private fun getCompatibilityColor(): List<List<CompatibilityColor>> = listOf(
+    private fun initCompatibilityColor(): List<List<CompatibilityColor>> = listOf(
         listOf( //0. INFP 궁합
             CompatibilityColor.GOOD,
             CompatibilityColor.GOOD,
