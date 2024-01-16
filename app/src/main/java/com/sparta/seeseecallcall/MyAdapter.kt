@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
-
+import org.w3c.dom.Text
 
 
 class MyAdapter(private val dataset: MutableList<Contact>) :
@@ -39,27 +39,36 @@ class MyAdapter(private val dataset: MutableList<Contact>) :
             itemClick?.onStarClick(holder.itemView, holder.adapterPosition)
         }
 
-
-        val contact: Contact = dataset[position]
-        holder.starImageView.setImageResource(
-            if (contact.favorite) R.drawable.icon_star_full
-            else R.drawable.icon_star_empty
-        )
-        holder.profileImageView.run{
-            if(contact.profileImage == null){
-                setImageResource(R.drawable.icon_profile_default)
-            }
-            else{
-                setImageURI(contact.profileImage)
-                clipToOutline = true
-            }
-        }
-        holder.nameTextView.text = contact.name
+        bind(holder, position)
     }
 
     inner class MyHolder(private val binding: RecyclerViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val starImageView: ImageView = binding.imgStar
         val profileImageView: ImageView = binding.imgProfile
         val nameTextView: TextView = binding.tvName
+        val mbtiTextView:TextView = binding.tvMbti
+        val phoneNumberTextView: TextView = binding.tvPhoneNumber
+    }
+
+    private fun bind(holder:MyHolder, position: Int){
+        val contact: Contact = dataset[position]
+
+        holder.run {
+            starImageView.setImageResource(
+                if (contact.favorite) R.drawable.icon_star_yellow
+                else R.drawable.icon_star_gray
+            )
+            profileImageView.run {
+                if (contact.profileImage == null) {
+                    setImageResource(R.drawable.profile_default)
+                } else {
+                    setImageURI(contact.profileImage)
+                    clipToOutline = true
+                }
+            }
+            nameTextView.text = contact.name
+            mbtiTextView.text = contact.mbti
+            phoneNumberTextView.text = contact.phoneNumber
+        }
     }
 }
