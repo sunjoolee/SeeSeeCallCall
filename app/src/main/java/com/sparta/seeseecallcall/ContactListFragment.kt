@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
+import com.sparta.seeseecallcall.MainActivity.Companion.contactBookmarkList
+import com.sparta.seeseecallcall.MainActivity.Companion.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
@@ -22,7 +23,7 @@ class ContactListFragment : Fragment() {
     ): View? {
         val binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-        val adapter = MyAdapter(MainActivity.contactList)
+        val adapter = MyAdapter(contactList)
         binding.recyclerviewList.adapter = adapter
         binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
 
@@ -33,8 +34,11 @@ class ContactListFragment : Fragment() {
             }
 
             override fun onStarClick(view: View, position: Int) {
-                MainActivity.contactList[position].run{
+                contactList[position].run{
                     favorite = !favorite
+
+                    if(favorite) contactBookmarkList.add(this)
+                    else contactBookmarkList.remove(this)
                 }
                 adapter.notifyItemChanged(position)
             }

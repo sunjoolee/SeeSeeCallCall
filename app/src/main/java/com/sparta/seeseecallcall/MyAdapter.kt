@@ -33,10 +33,10 @@ class MyAdapter(private val dataset: MutableList<Contact>) :
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            itemClick?.onClick(holder.itemView, position)
+            itemClick?.onClick(holder.itemView, holder.adapterPosition)
         }
         holder.starImageView.setOnClickListener {
-            itemClick?.onStarClick(holder.itemView, position)
+            itemClick?.onStarClick(holder.itemView, holder.adapterPosition)
         }
 
 
@@ -58,14 +58,8 @@ class MyAdapter(private val dataset: MutableList<Contact>) :
     }
 
     inner class MyHolder(private val binding: RecyclerViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val starImageView: ImageView
-        val profileImageView: ImageView
-        val nameTextView: TextView
-
-        init {
-            starImageView = binding.imgStar
-            profileImageView = binding.imgProfile
-            nameTextView = binding.tvName
-        }
+        val starImageView: ImageView = binding.imgStar
+        val profileImageView: ImageView = binding.imgProfile
+        val nameTextView: TextView = binding.tvName
     }
 }

@@ -94,5 +94,6 @@ class MainActivity : AppCompatActivity() {
                 memo = "중학교 동창"
             )
         )
+        val contactBookmarkList = contactList.filter { it.favorite } as MutableList<Contact>
     }
 }
