@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.MainActivity.Companion.contactBookmarkList
 import com.sparta.seeseecallcall.MainActivity.Companion.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
     private val TAG = "ContactListFragment"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,4 +45,9 @@ class ContactListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume(){
+        Log.d(TAG, "ContactListFragmentList onResume()")
+        this.view?.findViewById<RecyclerView>(R.id.recyclerview_list)?.adapter?.notifyDataSetChanged()
+        super.onResume()
+    }
 }
