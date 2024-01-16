@@ -10,6 +10,7 @@
     <LinearLayout
         android:id="@+id/layout_search_bar"
         android:background="@drawable/rounded_shape"
+        android:backgroundTint="@color/palette_secondary"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
         android:layout_width="match_parent"
