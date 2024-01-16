@@ -4,39 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactListFragment"
-    android:background="@color/palette_bg">
+    android:background="@color/palette_bg"
+    tools:context=".ContactListFragment">
+
     <LinearLayout
         android:id="@+id/layout_search_bar"
-        android:background="@drawable/rounded_shape"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
+        android:layout_height="52dp"
         android:layout_margin="12dp"
-        android:layout_height="52dp">
+        android:background="@drawable/rounded_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:backgroundTint="@color/palette_secondary"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
-            android:src="@drawable/icon_search"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="12dp"
-            />
+            android:src="@drawable/icon_search" />
+
         <EditText
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
             android:hint="@string/search_bar"
-            android:textColorHint="@color/palette_text"
-            android:textColor="@color/palette_text"
             android:maxLines="1"
-            />
+            android:textColor="@color/palette_text"
+            android:textColorHint="@color/palette_text" />
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="12dp"
         android:id="@+id/recyclerview_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_search_bar" />
 
