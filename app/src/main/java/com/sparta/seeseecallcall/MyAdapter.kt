@@ -9,14 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
 
-interface ItemClick {
-    fun onClick(view: View, position: Int)
-}
+
 
 class MyAdapter(private val dataset: MutableList<Contact>) :
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
-    val itemClick: ItemClick? = null
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+        fun onStarClick(view:View, position:Int)
+    }
 
+    var itemClick: ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         val binding = RecyclerViewItemBinding.inflate(
@@ -33,6 +35,10 @@ class MyAdapter(private val dataset: MutableList<Contact>) :
         holder.itemView.setOnClickListener {
             itemClick?.onClick(holder.itemView, position)
         }
+        holder.starImageView.setOnClickListener {
+            itemClick?.onStarClick(holder.itemView, position)
+        }
+
 
         val contact: Contact = dataset[position]
         holder.starImageView.setImageResource(
