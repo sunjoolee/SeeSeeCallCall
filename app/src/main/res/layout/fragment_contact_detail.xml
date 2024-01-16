@@ -131,7 +131,7 @@
                     android:layout_height="35dp"
                     android:layout_marginStart="7dp"
                     android:layout_marginTop="7dp"
-                    android:src="@drawable/callicon"
+                    android:src="@drawable/phon"
                     app:layout_constraintStart_toStartOf="@+id/vi_call"
                     app:layout_constraintTop_toTopOf="@+id/vi_call" />
 
