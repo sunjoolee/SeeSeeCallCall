@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_contact"
+        android:icon="@drawable/bottom_contact"
+        android:title="First" />
+
+    <item
+        android:id="@+id/navigation_bookmark"
+        android:icon="@drawable/bottom_bookmark"
+        android:title="Second" />
+
+    <item
+        android:id="@+id/navigation_myPage"
+        android:icon="@drawable/bottom_my"
+        android:title="Third" />
+
+</menu>
