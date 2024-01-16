@@ -31,11 +31,11 @@
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="52dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:ellipsize="end"
-        android:text="이름"
+        android:text="홍길동"
         android:textColor="@color/palette_text"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/tv_phone_number"
