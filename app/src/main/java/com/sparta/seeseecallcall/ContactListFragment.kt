@@ -18,7 +18,6 @@ import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
-    private val TAG = "ContactListFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +37,17 @@ class ContactListFragment : Fragment() {
 
         adapter.itemClick = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                Log.d(TAG, "position: $position")
-                //TODO 연락처 객체 넘기며, 연락처 상세 페이지로 이동
+                Log.d(Constants.TAG_List, "position: $position")
+
+                val contactData = contactList[position]
+                val contactDetailFragment = ContactDetailFragment.newInstance(contactData)
+                Log.d("보내는 Detail 프래그먼트", contactList[position].mbti)
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment, contactDetailFragment)
+                    .addToBackStack(null)
+                    .commit()
+
             }
 
             override fun onStarClick(view: View, position: Int) {
@@ -58,7 +66,7 @@ class ContactListFragment : Fragment() {
             override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(text: Editable?) {
-                Log.d(TAG, "afterTextChanged, ${text.toString()}")
+                Log.d(Constants.TAG_List, "afterTextChanged, ${text.toString()}")
                 adapter.ChangeDataset(
                     if (text.isNullOrBlank()) contactList
                     else getFilteredList(text.toString())
@@ -69,8 +77,8 @@ class ContactListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        Log.d(TAG, "ContactListFragmentList onResume()")
+    override fun onResume(){
+        Log.d(Constants.TAG_List, "ContactListFragmentList onResume()")
 
         this.view?.findViewById<RecyclerView>(R.id.recyclerview_list)?.adapter?.notifyDataSetChanged()
         super.onResume()
