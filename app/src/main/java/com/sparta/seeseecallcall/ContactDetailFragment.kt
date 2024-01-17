@@ -37,7 +37,7 @@ class ContactDetailFragment : Fragment() {
         }
 
         contactData?.let { data ->
-//             binding.imgDetailprofil.setImageResource(data.profileImage)
+//             binding.imgDetailprofil.setImageURI(data.profileImage)
             binding.tvDetailname.text = data.name
             binding.tvDetailMBTI.text = data.mbti
             binding.tvDetailPhon.text = data.phoneNumber
