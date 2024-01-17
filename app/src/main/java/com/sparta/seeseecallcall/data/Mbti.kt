@@ -1,5 +1,6 @@
 package com.sparta.seeseecallcall.data
-data class Mbti (
+
+data class Mbti(
     val type:String,
     val short_description:String,
     val long_description:String,
