@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
