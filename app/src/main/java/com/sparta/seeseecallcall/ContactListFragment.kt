@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
@@ -19,21 +18,25 @@ import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
 
+    private var binding: FragmentContactListBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentContactListBinding.inflate(inflater, container, false)
+        binding = FragmentContactListBinding.inflate(inflater, container, false)
 
         val adapter = MyAdapter(contactList)
-        binding.recyclerviewList.adapter = adapter
-        binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewList.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayout.VERTICAL
+        binding?.run {
+            recyclerviewList.adapter = adapter
+            recyclerviewList.layoutManager = LinearLayoutManager(context)
+            recyclerviewList.addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    LinearLayout.VERTICAL
+                )
             )
-        )
+        }
 
         adapter.itemClick = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
@@ -62,25 +65,31 @@ class ContactListFragment : Fragment() {
             }
         }
 
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
+        return binding!!.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.etSearch?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(text: Editable?) {
                 Log.d(Constants.TAG_List, "afterTextChanged, ${text.toString()}")
-                adapter.ChangeDataset(
+
+                val adapter = binding?.recyclerviewList?.adapter as MyAdapter
+                adapter.changeDataset(
                     if (text.isNullOrBlank()) contactList
                     else getFilteredList(text.toString())
                 )
             }
         })
-
-        return binding.root
     }
 
     override fun onResume(){
         Log.d(Constants.TAG_List, "ContactListFragmentList onResume()")
 
-        this.view?.findViewById<RecyclerView>(R.id.recyclerview_list)?.adapter?.notifyDataSetChanged()
+        binding?.recyclerviewList?.adapter?.notifyDataSetChanged()
         super.onResume()
     }
 
