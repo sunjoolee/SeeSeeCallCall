@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ContactListFragment"
     android:background="@color/palette_bg">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/palette_secondary"
+        android:elevation="0dp"
+        android:hapticFeedbackEnabled="true"
+        android:src="@drawable/button_float_icon"
+        android:tint="@color/white"
+        app:borderWidth="0dp"
+        app:fabCustomSize="60dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="40dp"
+        tools:ignore="ContentDescription" />
+
     <LinearLayout
         android:id="@+id/layout_search_bar"
         android:background="@drawable/rounded_shape"
@@ -32,12 +52,15 @@
             android:maxLines="1"
             />
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="12dp"
         android:id="@+id/recyclerview_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_search_bar" />
+        app:layout_constraintTop_toBottomOf="@id/layout_search_bar"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
