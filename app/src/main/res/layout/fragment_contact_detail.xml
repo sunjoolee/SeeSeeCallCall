@@ -37,6 +37,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/img_star"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/star"
@@ -77,6 +78,7 @@
             android:backgroundTint="#6ECA59"
             android:gravity="center"
             android:text="ENTP"
+            android:textSize="18sp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/tv_Detailname"
             app:layout_constraintEnd_toStartOf="@+id/tv_Detailname"
@@ -175,7 +177,7 @@
                     android:background="@drawable/shape"
                     android:backgroundTint="#8DBAFE"
                     android:padding="12dp"
-                    android:src="@drawable/gunghab"
+                    android:src="@drawable/btn_gunghab"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -296,6 +298,7 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_delete"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -323,6 +326,7 @@
     </ScrollView>
 
     <ImageView
+        android:id="@+id/img_back_btn"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="20dp"
