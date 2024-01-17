@@ -34,6 +34,13 @@
     <string name="enter_phone_number">전화번호를 입력해주세요.</string>
     <string name="enter_email">이메일을 입력해주세요.</string>
 
+    <string name="pass"></string>
+    <string name="error_no_name">이름이 입력되지 않았습니다.</string>
+    <string name="error_no_phone_number">전화번호가 입력되지 않았습니다.</string>
+    <string name="error_wrong_phone_number">전화번호 형식이 맞지 않습니다.</string>
+    <string name="error_no_email">이메일이 입력되지 않았습니다.</string>
+    <string name="error_wrong_email">이메일 형식이 맞지 않습니다.</string>
+
     <string name="ok">확인</string>
     <string name="cancel">취소</string>
     <string name="close">닫기</string>
