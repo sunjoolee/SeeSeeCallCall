@@ -54,7 +54,7 @@ class ContactBookmarkFragment : Fragment() {
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(text: Editable?) {
                 Log.d(TAG, "afterTextChanged, ${text.toString()}")
-                adapter.ChangeDataset(
+                adapter.changeDataset(
                     if (text.isNullOrBlank()) contactBookmarkList
                     else getFilteredList(text.toString())
                 )
