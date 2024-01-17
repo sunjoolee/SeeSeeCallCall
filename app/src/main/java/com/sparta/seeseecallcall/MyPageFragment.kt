@@ -1,10 +1,14 @@
 package com.sparta.seeseecallcall
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.databinding.FragmentMyPageBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +22,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class MyPageFragment : Fragment() {
     // TODO: Rename and change types of parameters
+    private var _binding: FragmentMyPageBinding? = null
+    private val binding get() = _binding
     private var param1: String? = null
     private var param2: String? = null
 
@@ -34,7 +40,17 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_page, container, false)
+        //return inflater.inflate(R.layout.fragment_my_page, container, false)
+        _binding = FragmentMyPageBinding.inflate(layoutInflater, container, false)
+        val mydata = ContactManager.myContact
+        Log.d("MyPageFragment", "mydata = ${mydata.name}")
+        binding?.tvMypageMBTI?.text = mydata.mbti
+        binding?.tvMypageBirth?.text = mydata.birthDate
+        binding?.tvMypageEmail?.text = mydata.email
+        binding?.tvMypageName?.text = mydata.name
+        binding?.tvMypagePhon?.text = mydata.phoneNumber
+
+        return binding?.root
     }
 
     companion object {
