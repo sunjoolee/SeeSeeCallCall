@@ -70,6 +70,77 @@
             app:layout_constraintEnd_toStartOf="@+id/tv_MypageName"
             app:layout_constraintTop_toTopOf="@+id/tv_MypageName" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_mypagegunghab"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="76dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_MypageMBTI">
+
+            <ImageView
+                android:id="@+id/img_mypagegunghab"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="#8DBAFE"
+                android:padding="12dp"
+                android:src="@drawable/gunghab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="궁합보기"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/img_mypagegunghab"
+                app:layout_constraintStart_toStartOf="@+id/img_mypagegunghab"
+                app:layout_constraintTop_toBottomOf="@+id/img_mypagegunghab" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_mbtitest"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="76dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_MypageMBTI">
+
+            <ImageView
+                android:id="@+id/img_mbtitest"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="#8DBAFE"
+                android:padding="12dp"
+                android:src="@drawable/gunghab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="검사하기"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/img_mbtitest"
+                app:layout_constraintStart_toStartOf="@+id/img_mbtitest"
+                app:layout_constraintTop_toBottomOf="@+id/img_mbtitest" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
         <LinearLayout
             android:id="@+id/ln_tell"
             android:layout_width="350dp"
@@ -80,7 +151,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_Mypageprofil">
+            app:layout_constraintTop_toBottomOf="@+id/ly_mypagegunghab">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -172,7 +243,7 @@
 
         </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </FrameLayout>
