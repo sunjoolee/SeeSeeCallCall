@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.data.ContactManager
@@ -25,6 +27,7 @@ class ContactListFragment : Fragment() {
         val adapter = MyAdapter(contactList)
         binding.recyclerviewList.adapter = adapter
         binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerviewList.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
 
         adapter.itemClick = object : MyAdapter.ItemClick{
             override fun onClick(view: View, position: Int) {
