@@ -17,7 +17,7 @@
         android:elevation="0dp"
         android:hapticFeedbackEnabled="true"
         android:src="@drawable/btn_float_icon"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:borderWidth="0dp"
         app:fabCustomSize="60dp"
         app:fabSize="normal"
