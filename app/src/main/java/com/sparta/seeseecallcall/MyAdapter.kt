@@ -15,7 +15,7 @@ import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
 
 
-class MyAdapter(private val dataset: MutableList<Contact>) :
+class MyAdapter(private var dataset: MutableList<Contact>) :
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
     private val TAG = "MyAdapter"
 
@@ -47,6 +47,12 @@ class MyAdapter(private val dataset: MutableList<Contact>) :
 
         bind(holder, position)
     }
+
+    fun ChangeDataset(newDataset:MutableList<Contact>){
+        dataset = newDataset
+        notifyDataSetChanged()
+    }
+
 
     inner class MyHolder(private val binding: RecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -85,7 +91,6 @@ class MyAdapter(private val dataset: MutableList<Contact>) :
 
             nameTextView.text = contact.name
 
-            Log.d(TAG, "mbti: ${contact.mbti}")
             mbtiTextView.text = contact.mbti
             mbtiTextView.background.setTint(
                 getColor(

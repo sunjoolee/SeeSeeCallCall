@@ -3,8 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="search_bar">MBTI 검색</string>
-    
+    <string name="search_bar">이름/MBTI 검색</string>
+
     <string name="compatibility_best">천생연분</string>
     <string name="compatibility_good">좋음</string>
     <string name="compatibility_soso">무난</string>
