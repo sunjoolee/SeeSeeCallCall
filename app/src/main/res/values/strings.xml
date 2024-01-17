@@ -3,6 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="search_bar">MBTI 검색</string>
+    <string name="search_bar">이름/MBTI 검색</string>
 
 </resources>
