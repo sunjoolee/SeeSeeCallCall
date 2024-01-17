@@ -48,7 +48,7 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
         bind(holder, position)
     }
 
-    fun ChangeDataset(newDataset:MutableList<Contact>){
+    fun changeDataset(newDataset:MutableList<Contact>){
         dataset = newDataset
         notifyDataSetChanged()
     }
