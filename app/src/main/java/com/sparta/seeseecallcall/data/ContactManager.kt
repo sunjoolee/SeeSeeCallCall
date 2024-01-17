@@ -1,5 +1,7 @@
 package com.sparta.seeseecallcall.data
 
+import android.net.Uri
+
 object ContactManager{
     val myContact = Contact(
         name="아이유",
@@ -125,7 +127,13 @@ object ContactManager{
             phoneNumber = "010-1717-1717",
             email = "yangsunmin@hotmail.com",
             birthDate = "1996/05/17",
+        ),
+        Contact(
+            name = "최아림",
+            mbti="????",
+            phoneNumber = "010-1818-1818",
+            email = "choiarim@gmail.com",
+            birthDate = "1996/06/18",
         )
-
     )
 }
