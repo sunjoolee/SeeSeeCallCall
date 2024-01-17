@@ -5,4 +5,36 @@
 
     <string name="search_bar">이름/MBTI 검색</string>
 
+    <string name="mbti">MBTI</string>
+    <string name="name">이름</string>
+    <string name="phone_number">전화번호</string>
+    <string name="email">이메일</string>
+
+    <string-array name="spinner_mbti">
+        <item>/?/?/?/?</item>
+        <item>INFP</item>
+        <item>ENFP</item>
+        <item>INFJ</item>
+        <item>ENFJ</item>
+        <item>INTJ</item>
+        <item>ENTJ</item>
+        <item>INTP</item>
+        <item>ENTP</item>
+        <item>ISFP</item>
+        <item>ESFP</item>
+        <item>ISTP</item>
+        <item>ESTP</item>
+        <item>ISFJ</item>
+        <item>ESFJ</item>
+        <item>ISTJ</item>
+        <item>ESTJ</item>
+    </string-array>
+
+    <string name="enter_name">이름을 입력해주세요.</string>
+    <string name="enter_phone_number">전화번호를 입력해주세요.</string>
+    <string name="enter_email">이메일을 입력해주세요.</string>
+
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="close">닫기</string>
 </resources>
