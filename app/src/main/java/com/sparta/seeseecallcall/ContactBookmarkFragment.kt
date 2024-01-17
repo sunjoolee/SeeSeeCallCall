@@ -1,6 +1,8 @@
 package com.sparta.seeseecallcall
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
@@ -37,7 +40,6 @@ class ContactBookmarkFragment : Fragment() {
                 Log.d(TAG, "position: $position")
                 //TODO 연락처 객체 넘기며, 연락처 상세 페이지로 이동
             }
-
             override fun onStarClick(view: View, position: Int) {
                 contactList.find { it === contactBookmarkList[position] }?.run{
                     favorite = !favorite
@@ -47,6 +49,18 @@ class ContactBookmarkFragment : Fragment() {
             }
         }
 
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(text: Editable?) {
+                Log.d(TAG, "afterTextChanged, ${text.toString()}")
+                adapter.ChangeDataset(
+                    if (text.isNullOrBlank()) contactBookmarkList
+                    else getFilteredList(text.toString())
+                )
+            }
+        })
+
         return binding.root
     }
 
@@ -55,5 +69,17 @@ class ContactBookmarkFragment : Fragment() {
 
         this.view?.findViewById<RecyclerView>(R.id.recyclerview_bookmark)?.adapter?.notifyDataSetChanged()
         super.onResume()
+    }
+
+    private fun getFilteredList(searchText: String): MutableList<Contact> {
+        val filteredList = mutableListOf<Contact>()
+        return filteredList.apply {
+            contactBookmarkList.forEach {
+                //이름으로 검색
+                if (it.name.contains(searchText)) add(it)
+                //mbti로 검색
+                if (it.mbti.contains(searchText.toUpperCase())) add(it)
+            }
+        }
     }
 }
