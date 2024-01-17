@@ -51,6 +51,7 @@ class ContactListFragment : Fragment() {
             }
 
             override fun onStarClick(view: View, position: Int) {
+                Log.d(Constants.TAG, contactList[position].favorite.toString())
                 contactList[position].run {
                     favorite = !favorite
                     if (favorite) {
