@@ -49,6 +49,7 @@ class ContactBookmarkFragment : Fragment() {
 
     override fun onResume(){
         Log.d(TAG, "ContactBookmarkFragmentList onResume()")
+
         this.view?.findViewById<RecyclerView>(R.id.recyclerview_bookmark)?.adapter?.notifyDataSetChanged()
         super.onResume()
     }

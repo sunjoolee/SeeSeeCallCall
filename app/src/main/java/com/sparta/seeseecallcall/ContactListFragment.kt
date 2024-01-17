@@ -22,7 +22,7 @@ class ContactListFragment : Fragment() {
     ): View? {
         val binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-        val adapter = MyAdapter(ContactManager.contactList)
+        val adapter = MyAdapter(contactList)
         binding.recyclerviewList.adapter = adapter
         binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
 
@@ -39,7 +39,8 @@ class ContactListFragment : Fragment() {
                     if(favorite) contactBookmarkList.add(this)
                     else contactBookmarkList.remove(this)
                 }
-                adapter.notifyItemChanged(position)
+                contactBookmarkList.sortBy { it.name }
+                adapter.notifyDataSetChanged()
             }
         }
 
@@ -48,6 +49,7 @@ class ContactListFragment : Fragment() {
 
     override fun onResume(){
         Log.d(TAG, "ContactListFragmentList onResume()")
+
         this.view?.findViewById<RecyclerView>(R.id.recyclerview_list)?.adapter?.notifyDataSetChanged()
         super.onResume()
     }

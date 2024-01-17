@@ -10,7 +10,7 @@ object ContactManager{
     )
 
 
-    val contactList = getDefaultContactList()
+    val contactList = getDefaultContactList().sortedBy { it.name } as MutableList<Contact>
     val contactBookmarkList = contactList.filter { it.favorite } as MutableList<Contact>
 
     private fun getDefaultContactList():MutableList<Contact> = mutableListOf<Contact>(
