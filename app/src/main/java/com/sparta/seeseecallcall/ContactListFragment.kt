@@ -53,9 +53,14 @@ class ContactListFragment : Fragment() {
             override fun onStarClick(view: View, position: Int) {
                 contactList[position].run {
                     favorite = !favorite
-
-                    if (favorite) contactBookmarkList.add(this)
-                    else contactBookmarkList.remove(this)
+                    if (favorite) {
+                        contactBookmarkList.add(this)
+                        contactList[position].favorite = true
+                    }
+                    else {
+                        contactBookmarkList.remove(this)
+                        contactList[position].favorite = false
+                    }
                 }
                 contactBookmarkList.sortBy { it.name }
                 adapter.notifyDataSetChanged()
