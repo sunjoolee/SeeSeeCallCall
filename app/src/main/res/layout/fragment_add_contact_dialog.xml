@@ -4,80 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddContactDialogFragment"
-    android:background="#24293D">
+    android:background="#24293D"
+    tools:context=".AddContactDialogFragment">
 
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/text_background"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:padding="15dp"
+
+    <TextView
+        android:id="@+id/addmbti"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shap2"
+        android:backgroundTint="#2F3855"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
 
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/text_background"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="MBTI"
+        android:textColor="#8DBAFE"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/addmbti"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintStart_toStartOf="@+id/addmbti"
+        app:layout_constraintTop_toTopOf="@+id/addmbti"
+        app:layout_constraintVertical_bias="0.509" />
 
-    <EditText
-        android:id="@+id/editTextText5"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/text_background"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="164dp"
+        app:layout_constraintBottom_toBottomOf="@+id/addmbti"
+        app:layout_constraintEnd_toEndOf="@+id/addmbti"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/addmbti"
+        app:layout_constraintVertical_bias="0.535" />
 
-    <EditText
-        android:id="@+id/editTextText6"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/text_background"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+    <LinearLayout
+        android:id="@+id/addname"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:background="@drawable/shap2"
+        android:backgroundTint="#2F3855"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="287dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="이름"
+            android:textColor="#8DBAFE"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="abcde@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pnonenum"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:background="@drawable/shap2"
+        android:backgroundTint="#2F3855"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="374dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="전화번호"
+            android:textColor="#8DBAFE"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add_phonenum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="abcde@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addemail"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:background="@drawable/shap2"
+        android:backgroundTint="#2F3855"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="466dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="이메일"
+            android:textColor="#8DBAFE"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="abcde@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button3"
@@ -87,8 +168,12 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/btn_bg1"
         android:text="취소"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintTop_toBottomOf="@+id/addemail"
+        app:layout_constraintVertical_bias="0.361" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button5"
@@ -98,8 +183,12 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/btn_bg2"
         android:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.213"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addemail"
+        app:layout_constraintVertical_bias="0.361" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
