@@ -14,7 +14,9 @@ object MbtiManager {
         if(myMbti.bestCompatibility.contains(mbti))  return CompatibilityText.BEST
         if(myMbti.goodCompatibility.contains(mbti))  return CompatibilityText.GOOD
         if(myMbti.sosoCompatibility.contains(mbti))  return CompatibilityText.SOSO
-        if(myMbti.badCompatibility.contains(mbti))  return CompatibilityText.BEST
+        if(myMbti.badCompatibility.contains(mbti))  return CompatibilityText.BAD
+
+        return CompatibilityText.UN_KNOWN
     }
 
     fun getCompatibilityColor(mbti:String){
