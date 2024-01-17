@@ -17,7 +17,7 @@
         android:elevation="0dp"
         android:hapticFeedbackEnabled="true"
         android:src="@drawable/btn_float_icon"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:borderWidth="0dp"
         app:fabCustomSize="60dp"
         app:fabSize="normal"
@@ -58,10 +58,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_list"
         android:layout_width="match_parent"
-        tools:listitem="@layout/recycler_view_item"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_search_bar" />
+        app:layout_constraintTop_toBottomOf="@id/layout_search_bar"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/recycler_view_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
