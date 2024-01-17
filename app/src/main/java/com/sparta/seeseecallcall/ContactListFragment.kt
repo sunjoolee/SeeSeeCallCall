@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sparta.seeseecallcall.Constants.TAG_LIST
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
@@ -18,16 +19,17 @@ import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
 
-    private var binding: FragmentContactListBinding? = null
+    private var _binding: FragmentContactListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentContactListBinding.inflate(inflater, container, false)
+        _binding = FragmentContactListBinding.inflate(inflater, container, false)
 
         val adapter = MyAdapter(contactList)
-        binding?.run {
+        binding.run {
             recyclerviewList.adapter = adapter
             recyclerviewList.layoutManager = LinearLayoutManager(context)
             recyclerviewList.addItemDecoration(
@@ -40,7 +42,7 @@ class ContactListFragment : Fragment() {
 
         adapter.itemClick = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                Log.d(Constants.TAG_List, "position: $position")
+                Log.d(Constants.TAG_LIST, "position: $position")
 
                 val contactData = contactList[position]
                 val contactDetailFragment = ContactDetailFragment.newInstance(contactData)
@@ -65,31 +67,41 @@ class ContactListFragment : Fragment() {
             }
         }
 
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.etSearch?.addTextChangedListener(object : TextWatcher {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(text: Editable?) {
-                Log.d(Constants.TAG_List, "afterTextChanged, ${text.toString()}")
+                Log.d(TAG_LIST, "afterTextChanged, ${text.toString()}")
 
-                val adapter = binding?.recyclerviewList?.adapter as MyAdapter
+                val adapter = binding.recyclerviewList.adapter as MyAdapter
                 adapter.changeDataset(
                     if (text.isNullOrBlank()) contactList
                     else getFilteredList(text.toString())
                 )
             }
         })
+
+        binding.floatingBtn.setOnClickListener {
+            Log.d(TAG_LIST, "floating action button clicked")
+
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .add(R.id.nav_host_fragment,AddContactDialogFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onResume(){
-        Log.d(Constants.TAG_List, "ContactListFragmentList onResume()")
+        Log.d(TAG_LIST, "ContactListFragmentList onResume()")
 
-        binding?.recyclerviewList?.adapter?.notifyDataSetChanged()
+        binding.recyclerviewList.adapter?.notifyDataSetChanged()
         super.onResume()
     }
 
