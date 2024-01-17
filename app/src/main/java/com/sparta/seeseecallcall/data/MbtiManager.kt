@@ -3,6 +3,36 @@ package com.sparta.seeseecallcall.data
 import com.sparta.seeseecallcall.R
 
 object MbtiManager {
+    val mbtiList:List<Mbti> = initMbtiList()
+    fun getCompatibility(mbti:String): CompatibilityText{
+        if((mbti=="????")||(ContactManager.myContact.mbti == "????"))
+            return CompatibilityText.UN_KNOWN
+
+        val myMbti = mbtiList.find { it.type == ContactManager.myContact.mbti}!!
+        if(myMbti.bestCompatibility.contains(mbti))  return CompatibilityText.BEST
+        if(myMbti.goodCompatibility.contains(mbti))  return CompatibilityText.GOOD
+        if(myMbti.sosoCompatibility.contains(mbti))  return CompatibilityText.SOSO
+        if(myMbti.badCompatibility.contains(mbti))  return CompatibilityText.BAD
+
+        return CompatibilityText.UN_KNOWN
+    }
+    fun getCompatibilityColor(mbti:String){
+        //TODO getCompatibility() 결과에 기반하여 궁합 색 리소스 ID 반환
+    }
+
+    private fun initMbtiList():List<Mbti> = listOf(
+        Mbti( //0. INFP
+            type="INFP",
+            short_description = "잔다르크형",
+            long_description = "이상적인 세상을 만들어 가는 사람들",
+            bestCompatibility = listOf("ENFJ"),
+            goodCompatibility = listOf("INFP","ENFP","INFJ","INTJ","INTP","ENTP"),
+            sosoCompatibility = listOf(),
+            badCompatibility = listOf("ISFP","ESFP","ISTP","ESTP","ISFJ","ESFJ","ISTJ","ESTJ")
+            )
+    )
+
+    //-------------기존 mbti 관련 코드 (빌드 되도록 남겨둠)-------------
     val mbtiId: Map<String, Int> = initMbtiId()
     val compatibilityColor: List<List<CompatibilityColor>> = initCompatibilityColor()
     private fun initMbtiId(): Map<String, Int> = mapOf(
