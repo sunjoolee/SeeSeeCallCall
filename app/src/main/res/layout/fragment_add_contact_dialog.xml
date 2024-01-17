@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/img_profile"
                 android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_shape"
                 android:clipToOutline="true"
@@ -161,20 +161,19 @@
                 android:id="@+id/tv_error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/layout_email"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="@string/enter_name"
+                android:layout_marginTop="12dp"
                 android:textColor="@color/red"
                 android:textSize="18sp"
-                android:layout_marginTop="4dp"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_email"
+                tools:text="@string/enter_name" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/gray"
                 android:text="@string/cancel"
