@@ -1,10 +1,16 @@
 package com.sparta.seeseecallcall
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
@@ -50,7 +56,16 @@ class MyPageFragment : Fragment() {
         binding?.tvMypageName?.text = mydata.name
         binding?.tvMypagePhon?.text = mydata.phoneNumber
 
+
+        val mbtitestBtn: ConstraintLayout? = binding?.lyMbtitest
+        mbtitestBtn?.setOnClickListener {
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.16personalities.com/ko/무료-성격-유형-검사"))
+            startActivity(intent)
+        }
+
+
         return binding?.root
+
     }
 
     companion object {
