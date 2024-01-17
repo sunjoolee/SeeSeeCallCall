@@ -93,7 +93,7 @@
                 android:id="@+id/ly_chat"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="76dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -129,7 +129,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="76dp"
+                android:layout_marginEnd="156dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -156,6 +156,41 @@
                     app:layout_constraintEnd_toEndOf="@+id/img_call"
                     app:layout_constraintStart_toStartOf="@+id/img_call"
                     app:layout_constraintTop_toBottomOf="@+id/img_call" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_gunghab"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_gunghab"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/shape"
+                    android:backgroundTint="#8DBAFE"
+                    android:padding="12dp"
+                    android:src="@drawable/gunghab"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="궁합보기"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/img_gunghab"
+                    app:layout_constraintStart_toStartOf="@+id/img_gunghab"
+                    app:layout_constraintTop_toBottomOf="@+id/img_gunghab" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
