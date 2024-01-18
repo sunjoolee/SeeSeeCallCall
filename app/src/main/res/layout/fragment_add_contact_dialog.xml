@@ -3,192 +3,202 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#24293D"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    android:background="@drawable/rounded_shape_10"
+    android:backgroundTint="@color/palette_bg"
     tools:context=".AddContactDialogFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_shape_10"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_mbti"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/addmbti"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_shape_20"
-        android:backgroundTint="#2F3855"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+            <LinearLayout
+                android:id="@+id/layout_mbti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_shape_10"
+                android:backgroundTint="@color/palette_secondary"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                app:layout_constraintTop_toBottomOf="@id/img_profile">
 
+                <TextView
+                    android:id="@+id/tv_mbti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/mbti"
+                    android:textColor="@color/palette_accent"
+                    android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:text="MBTI"
-        android:textColor="#8DBAFE"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/addmbti"
-        app:layout_constraintEnd_toStartOf="@+id/spinner2"
-        app:layout_constraintStart_toStartOf="@+id/addmbti"
-        app:layout_constraintTop_toTopOf="@+id/addmbti"
-        app:layout_constraintVertical_bias="0.509" />
+                <Spinner
+                    android:gravity="center"
+                    android:id="@+id/spinner_mbti"
+                    android:padding="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp" />
+            </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="164dp"
-        app:layout_constraintBottom_toBottomOf="@+id/addmbti"
-        app:layout_constraintEnd_toEndOf="@+id/addmbti"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/addmbti"
-        app:layout_constraintVertical_bias="0.535" />
+            <LinearLayout
+                android:id="@+id/layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_shape_10"
+                android:backgroundTint="@color/palette_secondary"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_mbti">
 
-    <LinearLayout
-        android:id="@+id/addname"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:background="@drawable/rounded_shape_20"
-        android:backgroundTint="#2F3855"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="287dp"
-        tools:ignore="MissingConstraints">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/name"
+                    android:textColor="@color/palette_accent"
+                    android:textSize="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="이름"
-            android:textColor="#8DBAFE"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:hint="@string/enter_name"
+                    android:textColor="@color/palette_text"
+                    android:textColorHint="@color/palette_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/add_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="abcde@gmail.com"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/layout_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_shape_10"
+                android:backgroundTint="@color/palette_secondary"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_name">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/palette_accent"
+                    android:textSize="16dp" />
 
-    <LinearLayout
-        android:id="@+id/pnonenum"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:background="@drawable/rounded_shape_20"
-        android:backgroundTint="#2F3855"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="374dp">
+                <EditText
+                    android:id="@+id/et_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:hint="@string/enter_phone_number"
+                    android:inputType="phone"
+                    android:textColor="@color/palette_text"
+                    android:textColorHint="@color/palette_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="전화번호"
-            android:textColor="#8DBAFE"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_shape_10"
+                android:backgroundTint="@color/palette_secondary"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_phone_number">
 
-        <EditText
-            android:id="@+id/add_phonenum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="abcde@gmail.com"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/email"
+                    android:textColor="@color/palette_accent"
+                    android:textSize="16dp" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:hint="@string/enter_email"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/palette_text"
+                    android:textColorHint="@color/palette_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/addemail"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:background="@drawable/rounded_shape_20"
-        android:backgroundTint="#2F3855"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="466dp"
-        tools:ignore="MissingConstraints">
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/red"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_email"
+                tools:text="@string/enter_name" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="이메일"
-            android:textColor="#8DBAFE"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="@color/gray"
+                android:text="@string/cancel"
+                android:textColor="@color/palette_bg"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_error" />
 
-        <EditText
-            android:id="@+id/add_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="abcde@gmail.com"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/palette_accent"
+                android:text="@string/ok"
+                android:textColor="@color/palette_bg"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_cancel"
+                app:layout_constraintTop_toTopOf="@id/btn_cancel" />
 
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
-        android:layout_width="115dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/btn_bg1"
-        android:text="취소"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addemail"
-        app:layout_constraintVertical_bias="0.361" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button5"
-        android:layout_width="115dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/btn_bg2"
-        android:text="확인"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addemail"
-        app:layout_constraintVertical_bias="0.361" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

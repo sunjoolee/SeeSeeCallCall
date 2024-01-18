@@ -1,59 +1,131 @@
 package com.sparta.seeseecallcall
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.fragment.app.DialogFragment
+import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
+import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
+import java.lang.Exception
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class AddContactDialogFragment() : DialogFragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddContactDialogFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AddContactDialogFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentAddContactDialogBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentAddContactDialogBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initProfileImageButton()
+
+        initMbtiSpinner()
+
+        initCancelButton()
+        initOkayButton()
+    }
+
+    private fun initProfileImageButton() {
+        binding.imgProfile.setOnClickListener {
+            //TODO 갤러리에서 사진 가져오기
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_contact_dialog, container, false)
-}
+    private fun initMbtiSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_mbti,
+            R.layout.spinner_text
+        ).also { adapter ->
+            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerMbti.adapter = adapter
+        }
+    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddContactDialogFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddContactDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        private fun initCancelButton() {
+        binding.btnCancel.setOnClickListener {
+            Log.d(TAG_ADD_CONTACT, "cancel button clicked")
+            dismiss()
+        }
+    }
+
+    enum class ErrorMsg(val id: Int) {
+        PASS(R.string.pass),
+        NAME_EMPTY(R.string.error_no_name),
+        PHONE_NUMBER_EMPTY(R.string.error_no_phone_number),
+        PHONE_NUMBER_WRONG(R.string.error_wrong_phone_number),
+        EMAIL_EMPTY(R.string.error_no_email),
+        EMAIL_WRONG(R.string.error_wrong_email)
+    }
+
+    private fun getNameError(text: String): ErrorMsg = (
+            if (text.isNullOrBlank()) ErrorMsg.NAME_EMPTY
+            else ErrorMsg.PASS
+            )
+
+    private fun getPhoneNumberError(text: String): ErrorMsg = (
+            if (text.isNullOrBlank()) ErrorMsg.PHONE_NUMBER_EMPTY
+            else if (!text.matches("""^\d{3}-\d{3,4}-\d{4}$""".toRegex())) ErrorMsg.PHONE_NUMBER_WRONG
+            else ErrorMsg.PASS
+            )
+
+    private fun getEmailError(text: String): ErrorMsg = (
+            if (text.isNullOrBlank()) ErrorMsg.EMAIL_EMPTY
+            else if (!text.matches("""^[A-z0-9]{2,10}+@[A-z]{2,20}+.[a-z]{2,3}$""".toRegex())) ErrorMsg.EMAIL_WRONG
+            else ErrorMsg.PASS
+            )
+
+    private fun initOkayButton() {
+        binding.btnOk.setOnClickListener {
+            Log.d(TAG_ADD_CONTACT, "ok button clicked")
+
+            //유효성 검사
+           with(getNameError(binding.etName.text.toString())){
+               if (this != ErrorMsg.PASS) {
+                   binding.tvError.setText(this.id)
+                   return@setOnClickListener
+               }
+           }
+            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())){
+                if (this != ErrorMsg.PASS) {
+                    binding.tvError.setText(this.id)
+                    return@setOnClickListener
                 }
             }
+            with(getEmailError(binding.etEmail.text.toString())){
+                if (this != ErrorMsg.PASS) {
+                    binding.tvError.setText(this.id)
+                    return@setOnClickListener
+                }
+            }
+
+            ContactManager.addNewContact(
+                profileImage = null, //TODO 프로필 사진 등록
+                name = binding.etName.text.toString(),
+                mbti = binding.spinnerMbti.selectedItem.toString(),
+                phoneNumber = binding.etPhoneNumber.text.toString(),
+                email = binding.etEmail.text.toString(),
+                birthDate = "0000/00/00" //TODO 생일 등록
+            )
+            dismiss()
+        }
     }
+
+
+
 }
