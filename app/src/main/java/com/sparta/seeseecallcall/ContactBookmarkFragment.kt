@@ -19,6 +19,7 @@ import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
 
+    private val adapter by lazy { MyAdapter(contactBookmarkList) }
     private val TAG = "ContactBookmarkFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,6 @@ class ContactBookmarkFragment : Fragment() {
     ): View? {
         val binding = FragmentContactBookmarkBinding.inflate(inflater, container, false)
 
-        val adapter = MyAdapter(contactBookmarkList)
         binding.recyclerviewBookmark.adapter = adapter
         binding.recyclerviewBookmark.layoutManager = LinearLayoutManager(context)
         binding.recyclerviewBookmark.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
@@ -67,7 +67,7 @@ class ContactBookmarkFragment : Fragment() {
     override fun onResume(){
         Log.d(TAG, "ContactBookmarkFragmentList onResume()")
 
-        this.view?.findViewById<RecyclerView>(R.id.recyclerview_bookmark)?.adapter?.notifyDataSetChanged()
+        adapter?.notifyDataSetChanged()
         super.onResume()
     }
 
