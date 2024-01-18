@@ -46,7 +46,7 @@ class ContactBookmarkFragment : Fragment() {
             }
             override fun onStarClick(view: View, contact:Contact) {
                 ContactBookmarkManager.toggleFavoriteContact(contact)
-                adapter?.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
             }
         }
 

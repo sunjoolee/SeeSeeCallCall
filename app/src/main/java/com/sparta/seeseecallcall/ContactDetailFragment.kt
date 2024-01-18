@@ -141,7 +141,8 @@ class ContactDetailFragment : Fragment(), ContactDeleteDialog.OnConfirmButtonCli
     override fun onConfirmButtonClicked() {
         ContactBookmarkManager.deleteContactFromBookmark(contactData!!)
         ContactGroupManager.deleteContactFromGroup(contactData!!)
-
+        onContactDeleteListener?.onContactDelete()
+        
         activity?.supportFragmentManager?.popBackStack()
     }
 

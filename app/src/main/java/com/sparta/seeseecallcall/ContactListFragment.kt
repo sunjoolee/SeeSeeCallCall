@@ -23,7 +23,8 @@ import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment(),
     OnStartDetailListener,
-    OnFavoriteChangeListener{
+    OnFavoriteChangeListener,
+    OnContactDeleteListener{
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
@@ -37,6 +38,7 @@ class ContactListFragment : Fragment(),
         _binding = FragmentContactListBinding.inflate(inflater, container, false)
 
         //즐겨찾기 리싸이클러뷰 설정
+        binding.tvFavoriteContactCount.text = contactBookmarkList.size.toString() + "명"
         binding.recyclerviewFavorite.run{
             adapter = favoriteAdapter
             layoutManager= LinearLayoutManager(context)
@@ -44,13 +46,7 @@ class ContactListFragment : Fragment(),
         }
         favoriteAdapter.itemClick = object :ItemClick{
             override fun onClick(view: View, contact: Contact) {
-                val contactDetailFragment = ContactDetailFragment.newInstance(contact)
-
-                contactDetailFragment.onFavoriteChangeListener = this@ContactListFragment
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment, contactDetailFragment)
-                    .addToBackStack(null)
-                    .commit()
+                startContactDetailFragment(contact)
             }
 
             override fun onStarClick(view: View, contact: Contact) {
@@ -107,9 +103,14 @@ class ContactListFragment : Fragment(),
     }
 
     override fun onStartDetail(contact: Contact) {
+       startContactDetailFragment(contact)
+    }
+
+    private fun startContactDetailFragment(contact: Contact){
         val contactDetailFragment = ContactDetailFragment.newInstance(contact)
 
         contactDetailFragment.onFavoriteChangeListener = this@ContactListFragment
+        contactDetailFragment.onContactDeleteListener = this@ContactListFragment
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, contactDetailFragment)
             .addToBackStack(null)
@@ -117,18 +118,26 @@ class ContactListFragment : Fragment(),
     }
 
     override fun onFavoriteChanged() {
-        Log.d(Constants.TAG_MY_GROUP_ADAPTER, "on favorite changed")
-        favoriteAdapter.notifyDataSetChanged()
-        groupAdapter.notifyDataSetChanged()
+        Log.d(Constants.TAG_LIST, "on favorite changed")
+        refreshRecyclerViews()
+    }
+
+    override fun onContactDelete() {
+        Log.d(Constants.TAG_LIST, "on contact delete")
+        refreshRecyclerViews()
     }
 
 
     override fun onResume() {
         Log.d(TAG_LIST, "ContactListFragmentList onResume()")
-        favoriteAdapter?.notifyDataSetChanged()
-        groupAdapter?.notifyDataSetChanged()
+        refreshRecyclerViews()
         super.onResume()
     }
 
+    private fun refreshRecyclerViews(){
+        binding.tvFavoriteContactCount.text = contactBookmarkList.size.toString() + "명"
+        favoriteAdapter?.notifyDataSetChanged()
+        groupAdapter?.notifyDataSetChanged()
+    }
 
 }
