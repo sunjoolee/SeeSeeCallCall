@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp"
-    android:layout_margin="15dp"
+    android:padding="10dp"
+    android:layout_margin="20dp"
     android:background="@drawable/rounded_dialog_corners">
 
     <View
@@ -12,12 +12,15 @@
         android:layout_height="20dp"/>
 
     <ImageView
+        android:id="@+id/iv_type"
         android:layout_width="123dp"
         android:layout_height="116dp"
         android:layout_gravity="center"
         android:scaleType="fitStart"
+        android:clipToOutline="true"
         android:src="@drawable/profile_istj" />
     <TextView
+        android:id="@+id/tv_mbti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ISTJ"
@@ -28,6 +31,7 @@
         android:layout_gravity="center"/>
 
     <TextView
+        android:id="@+id/tv_short_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="세상의 소금형"
@@ -38,7 +42,8 @@
         android:layout_gravity="center"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_long_desc"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="한 번 시작한 일은 끝까지 해내는 사람들"
         android:textColor="@color/white"
