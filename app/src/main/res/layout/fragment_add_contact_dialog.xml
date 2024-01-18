@@ -21,7 +21,7 @@
                 android:id="@+id/img_profile"
                 android:layout_width="140dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_shape_10"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
@@ -46,17 +46,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="12dp"
                     android:text="@string/mbti"
                     android:textColor="@color/palette_accent"
                     android:textSize="20dp" />
 
                 <Spinner
-                    android:layout_gravity="center"
                     android:id="@+id/spinner_mbti"
-                    android:padding="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="36dp" />
             </LinearLayout>
 
@@ -170,16 +170,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="12dp"
                     android:text="@string/birth_date"
                     android:textColor="@color/palette_accent"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:layout_gravity="center"
                     android:id="@+id/tv_birth_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="36dp"
                     android:text="@string/default_birth_date"
                     android:textColor="@color/palette_text"
@@ -196,14 +197,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_birth_date"
-                tools:text="@string/enter_name" />
+                tools:text="@string/error_no_name" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/gray"
                 android:text="@string/cancel"
                 android:textColor="@color/palette_bg"
