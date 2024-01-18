@@ -1,5 +1,7 @@
 package com.sparta.seeseecallcall
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,7 +22,7 @@ import com.sparta.seeseecallcall.data.ContactGroupManager.contactGroupList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment(),
-    MyGroupAdapter.OnStartDetailFragment,
+    OnStartDetailListener,
     OnFavoriteChangeListener{
 
     private var _binding: FragmentContactListBinding? = null
@@ -40,7 +42,7 @@ class ContactListFragment : Fragment(),
             layoutManager= LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
-        favoriteAdapter.itemClick = object :MyAdapter.ItemClick{
+        favoriteAdapter.itemClick = object :ItemClick{
             override fun onClick(view: View, contact: Contact) {
                 val contactDetailFragment = ContactDetailFragment.newInstance(contact)
 
@@ -104,7 +106,7 @@ class ContactListFragment : Fragment(),
         }
     }
 
-    override fun onStartDetailFragment(contact: Contact) {
+    override fun onStartDetail(contact: Contact) {
         val contactDetailFragment = ContactDetailFragment.newInstance(contact)
 
         contactDetailFragment.onFavoriteChangeListener = this@ContactListFragment

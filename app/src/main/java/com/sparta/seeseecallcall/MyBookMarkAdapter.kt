@@ -12,7 +12,7 @@ import com.sparta.seeseecallcall.databinding.BookmarkRecyclerViewItemBinding
 class MyBookMarkAdapter(private var dataset: MutableList<Contact>) :
     RecyclerView.Adapter<MyBookMarkAdapter.MyViewHolder>() {
 
-    var itemClick: MyAdapter.ItemClick? = null
+    var itemClick: ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = BookmarkRecyclerViewItemBinding.inflate(

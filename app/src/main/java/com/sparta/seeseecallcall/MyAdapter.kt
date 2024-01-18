@@ -13,14 +13,12 @@ import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
 
-
+interface ItemClick {
+    fun onClick(view: View, contact:Contact)
+    fun onStarClick(view: View,contact: Contact)
+}
 class MyAdapter(private var dataset: MutableList<Contact>) :
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
-
-    interface ItemClick {
-        fun onClick(view: View, contact:Contact)
-        fun onStarClick(view: View,contact: Contact)
-    }
 
     var itemClick: ItemClick? = null
 

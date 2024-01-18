@@ -12,18 +12,16 @@ import com.sparta.seeseecallcall.Constants.TAG_MY_GROUP_ADAPTER
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactBookmarkManager
 import com.sparta.seeseecallcall.data.ContactGroup
-import com.sparta.seeseecallcall.data.MyContactManager
 import com.sparta.seeseecallcall.databinding.RecyclerViewGroupItemBinding
-
+interface OnStartDetailListener {
+    fun onStartDetail(contact: Contact)
+}
 class MyGroupAdapter(private var groupDataset: MutableList<ContactGroup>) :
     RecyclerView.Adapter<MyGroupAdapter.MyGroupHolder>(),
-    AddContactDialogFragment.OnAddContactListener {
+    OnAddContactListener {
 
-    interface OnStartDetailFragment {
-        fun onStartDetailFragment(contact: Contact)
-    }
-    var onStartDetailListener: OnStartDetailFragment? = null
-    var onFavoriteChangeListener:OnFavoriteChangeListener? = null
+    var onStartDetailListener: OnStartDetailListener? = null
+    var onFavoriteChangeListener: OnFavoriteChangeListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyGroupHolder {
         val binding = RecyclerViewGroupItemBinding.inflate(
@@ -43,15 +41,20 @@ class MyGroupAdapter(private var groupDataset: MutableList<ContactGroup>) :
             val adapter = MyAdapter(groupDataset[position].contactList)
             groupRecyclerView.adapter = adapter
             groupRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
-            groupRecyclerView.addItemDecoration(DividerItemDecoration(itemView.context, LinearLayout.VERTICAL))
+            groupRecyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    itemView.context,
+                    LinearLayout.VERTICAL
+                )
+            )
 
-            adapter.itemClick = object : MyAdapter.ItemClick {
+            adapter.itemClick = object : ItemClick {
                 override fun onClick(view: View, contact: Contact) {
                     Log.d(TAG_MY_GROUP_ADAPTER, "on click")
-                    onStartDetailListener?.onStartDetailFragment(contact)
+                    onStartDetailListener?.onStartDetail(contact)
                 }
 
-                override fun onStarClick(view: View, contact:Contact) {
+                override fun onStarClick(view: View, contact: Contact) {
                     Log.d(TAG_MY_GROUP_ADAPTER, "on star click")
                     ContactBookmarkManager.toggleFavoriteContact(contact)
                     onFavoriteChangeListener?.onFavoriteChanged()
@@ -59,7 +62,8 @@ class MyGroupAdapter(private var groupDataset: MutableList<ContactGroup>) :
             }
         }
     }
-    fun changeDataset(newGroupDataset:MutableList<ContactGroup>){
+
+    fun changeDataset(newGroupDataset: MutableList<ContactGroup>) {
         groupDataset = newGroupDataset
         notifyDataSetChanged()
     }

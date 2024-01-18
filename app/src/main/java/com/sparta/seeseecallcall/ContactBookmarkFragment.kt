@@ -40,7 +40,7 @@ class ContactBookmarkFragment : Fragment() {
         binding.recyclerviewBookmark.adapter = adapter
         binding.recyclerviewBookmark.layoutManager = GridLayoutManager(context, 2)
 
-        adapter.itemClick = object : MyAdapter.ItemClick{
+        adapter.itemClick = object : ItemClick{
             override fun onClick(view: View, contact:Contact) {
                 //TODO 전화 인텐트 시작하기
             }

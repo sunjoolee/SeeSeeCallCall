@@ -23,15 +23,14 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class AddContactDialogFragment() : DialogFragment() {
+interface OnAddContactListener {
+    fun onAddContact()
+}
 
+class AddContactDialogFragment() : DialogFragment() {
 
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
-
-    interface OnAddContactListener {
-        fun onAddContact()
-    }
 
     var addContactListner: OnAddContactListener? = null
 
