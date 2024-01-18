@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ly_star"
+            android:id="@+id/btn_star"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
@@ -42,9 +42,9 @@
                 android:layout_height="30dp"
                 android:src="@drawable/icon_star_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/ly_star"
+                app:layout_constraintEnd_toEndOf="@id/btn_star"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ly_star" />
+                app:layout_constraintTop_toTopOf="@id/btn_star" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -162,7 +162,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ly_gunghab"
+                android:id="@+id/btn_gunghab"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -298,7 +298,7 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ly_delete"
+                android:id="@+id/btn_delete"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
