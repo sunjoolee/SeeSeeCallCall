@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
@@ -35,6 +36,9 @@ class AddContactDialogFragment() : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNav?.visibility = View.GONE
 
         initProfileImageButton()
 
@@ -169,6 +173,9 @@ class AddContactDialogFragment() : DialogFragment() {
             dismiss()
         }
     }
-
-
+    override fun onDestroyView() {
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNav?.visibility = View.VISIBLE
+        super.onDestroyView()
+    }
 }
