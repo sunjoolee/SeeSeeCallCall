@@ -1,268 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="380dp"
+    android:layout_height="500dp"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:layout_margin="20dp"
+    android:padding="5dp"
+    android:layout_margin="10dp"
     android:background="@drawable/rounded_dialog_corners">
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"/>
-
-    <ImageView
-        android:id="@+id/iv_type"
-        android:layout_width="123dp"
-        android:layout_height="116dp"
-        android:layout_gravity="center"
-        android:scaleType="fitStart"
-        android:clipToOutline="true"
-        android:src="@drawable/profile_istj" />
-    <TextView
-        android:id="@+id/tv_mbti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ISTJ"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/tv_short_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="세상의 소금형"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/tv_long_desc"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="한 번 시작한 일은 끝까지 해내는 사람들"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"
-        android:textSize="18sp"
-        android:layout_gravity="center"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_shape_10"
-        android:padding="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_gravity="center">
-
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 MBTI와의 궁합은 최악입니다."
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:orientation="vertical">
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_type"
+                android:layout_width="123dp"
+                android:layout_height="116dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:scaleType="fitStart"
+                android:clipToOutline="true"
+                android:background="@drawable/rounded_shape_20"
+                android:src="@drawable/profile_istj" />
+            <TextView
+                android:id="@+id/tv_mbti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ISTJ"
+                android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_shape_10"
-        android:padding="15dp"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+            <TextView
+                android:id="@+id/tv_short_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="세상의 소금형"
+                android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ISTJ 천생연분 궁합"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/tv_long_desc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="열정적으로 새로운 관계를 만드는 사람들입니다. test test"
+                android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:gravity="center"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_shape_20"
-                android:backgroundTint="@color/mbti_best"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_shape_10"
+                android:padding="15dp"
+                android:layout_marginBottom="15dp"
                 android:gravity="center"
-                android:text="ENTJ"
-                android:textColor="@color/white"/>
+                android:layout_gravity="center">
 
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_shape_20"
-                android:backgroundTint="@color/mbti_best"
-                android:gravity="center"
-                android:text="ENTJ"
-                android:textColor="@color/white"/>
+                <TextView
+                    android:id="@+id/tv_compability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mbti_compatibility"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:gravity="center"/>
 
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_shape_20"
-                android:backgroundTint="@color/mbti_best"
-                android:gravity="center"
-                android:text="ENTJ"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_shape_20"
-                android:backgroundTint="@color/mbti_best"
-                android:gravity="center"
-                android:text="ENTJ"
-                android:textColor="@color/white"/>
             </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ISTJ 천생연분 궁합"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_good"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_shape_10"
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:id="@+id/tv_best"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/best_compatibility_text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <HorizontalScrollView
+                    android:id="@+id/ly_best_scroll"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_good"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/ly_best"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:id="@+id/tv_good"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/compatibility_good_text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <HorizontalScrollView
+                    android:id="@+id/ly_good_scroll"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_good"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/ly_good"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:id="@+id/tv_bad"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/compatibility_bad_text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <HorizontalScrollView
+                    android:id="@+id/ly_bad_scroll"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_good"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </HorizontalScrollView>
+                    android:scrollbars="none">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ISTJ 최악 궁합"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+                    <LinearLayout
+                        android:id="@+id/ly_bad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    </LinearLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
+                </HorizontalScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_bad"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_bad"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_bad"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_shape_20"
-                    android:backgroundTint="@color/mbti_bad"
-                    android:gravity="center"
-                    android:text="ENTJ"
-                    android:textColor="@color/white"/>
             </LinearLayout>
 
-        </HorizontalScrollView>
+            <android.widget.Button
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_dialog_button"
+                android:backgroundTint="@color/gray"
+                android:text="닫기"
+                android:textColor="@color/white" />
 
-    </LinearLayout>
-
-    <android.widget.Button
-        android:id="@+id/btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_dialog_button"
-        android:backgroundTint="@color/gray"
-        android:text="닫기"
-        android:textColor="@color/white" />
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
