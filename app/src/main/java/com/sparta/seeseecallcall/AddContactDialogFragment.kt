@@ -1,5 +1,6 @@
 package com.sparta.seeseecallcall
 
+import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,15 +11,18 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
-import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
-import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AddContactDialogFragment() : DialogFragment() {
 
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
+
+    private var profileUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,7 @@ class AddContactDialogFragment() : DialogFragment() {
         initProfileImageButton()
 
         initMbtiSpinner()
+        initBirthDateDialog()
 
         initCancelButton()
         initOkayButton()
@@ -52,12 +57,51 @@ class AddContactDialogFragment() : DialogFragment() {
             R.array.spinner_mbti,
             R.layout.spinner_text
         ).also { adapter ->
-            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerMbti.adapter = adapter
+        }
+
+        binding.spinnerMbti.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (profileUri != null) return
+
+                binding.imgProfile.setImageResource(
+                    if (position == 0) R.drawable.profile_mbti
+                    else resources.getIdentifier(
+                        "profile_${binding.spinnerMbti.getItemAtPosition(position).toString().toLowerCase()}",
+                        "drawable",
+                        "com.sparta.seeseecallcall"
+                    )
+                )
+                binding.imgProfile.clipToOutline= true
+            }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                if (profileUri != null) return
+                else binding.imgProfile.setImageResource(R.drawable.profile_mbti)
+                binding.imgProfile.clipToOutline= true
+            }
         }
     }
 
-        private fun initCancelButton() {
+    private fun initBirthDateDialog() {
+        binding.tvBirthDate.setOnClickListener {
+            val cal = Calendar.getInstance()
+            DatePickerDialog(
+                requireContext(),
+                { _, year, month, day ->
+                    val selectedDate = Calendar.getInstance().apply {
+                        set(year, month, day)
+                    }
+                    val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+                    binding.tvBirthDate.text = dateFormat.format(selectedDate.time)
+                },
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+    }
+
+    private fun initCancelButton() {
         binding.btnCancel.setOnClickListener {
             Log.d(TAG_ADD_CONTACT, "cancel button clicked")
             dismiss()
@@ -95,19 +139,19 @@ class AddContactDialogFragment() : DialogFragment() {
             Log.d(TAG_ADD_CONTACT, "ok button clicked")
 
             //유효성 검사
-           with(getNameError(binding.etName.text.toString())){
-               if (this != ErrorMsg.PASS) {
-                   binding.tvError.setText(this.id)
-                   return@setOnClickListener
-               }
-           }
-            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())){
+            with(getNameError(binding.etName.text.toString())) {
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
                 }
             }
-            with(getEmailError(binding.etEmail.text.toString())){
+            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())) {
+                if (this != ErrorMsg.PASS) {
+                    binding.tvError.setText(this.id)
+                    return@setOnClickListener
+                }
+            }
+            with(getEmailError(binding.etEmail.text.toString())) {
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
@@ -115,17 +159,16 @@ class AddContactDialogFragment() : DialogFragment() {
             }
 
             ContactManager.addNewContact(
-                profileImage = null, //TODO 프로필 사진 등록
+                profileImage = profileUri,
                 name = binding.etName.text.toString(),
                 mbti = binding.spinnerMbti.selectedItem.toString(),
                 phoneNumber = binding.etPhoneNumber.text.toString(),
                 email = binding.etEmail.text.toString(),
-                birthDate = "0000/00/00" //TODO 생일 등록
+                birthDate = binding.tvBirthDate.text.toString()
             )
             dismiss()
         }
     }
-
 
 
 }
