@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
+import com.sparta.seeseecallcall.data.ContactGroupManager
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
 import java.text.SimpleDateFormat
@@ -223,7 +224,7 @@ class AddContactDialogFragment() : DialogFragment() {
                 }
             }
 
-            ContactManager.addNewContact(
+            ContactGroupManager.addNewContact(
                 profileImage = imageUri,
                 name = binding.etName.text.toString(),
                 mbti = binding.spinnerMbti.selectedItem.toString(),

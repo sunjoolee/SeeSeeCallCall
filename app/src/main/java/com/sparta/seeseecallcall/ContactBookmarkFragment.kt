@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
-import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
 
     private val adapter by lazy { MyAdapter(contactBookmarkList) }
     private val TAG = "ContactBookmarkFragment"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -36,16 +37,12 @@ class ContactBookmarkFragment : Fragment() {
         binding.recyclerviewBookmark.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
 
         adapter.itemClick = object : MyAdapter.ItemClick{
-            override fun onClick(view: View, position: Int) {
-                Log.d(TAG, "position: $position")
-                //TODO 연락처 객체 넘기며, 연락처 상세 페이지로 이동
+            override fun onClick(view: View, contact:Contact) {
+                //TODO 전화 인텐트 시작하기
             }
-            override fun onStarClick(view: View, position: Int) {
-                contactList.find { it === contactBookmarkList[position] }?.run{
-                    favorite = !favorite
-                }
-                contactBookmarkList.removeAt(position)
-                adapter.notifyItemRemoved(position)
+            override fun onStarClick(view: View, contact:Contact) {
+                ContactManager.toggleFavoriteContact(contact)
+                adapter?.notifyDataSetChanged()
             }
         }
 
@@ -66,7 +63,6 @@ class ContactBookmarkFragment : Fragment() {
 
     override fun onResume(){
         Log.d(TAG, "ContactBookmarkFragmentList onResume()")
-
         adapter?.notifyDataSetChanged()
         super.onResume()
     }

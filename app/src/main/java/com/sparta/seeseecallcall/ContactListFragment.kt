@@ -118,6 +118,7 @@ class ContactListFragment : Fragment(),
 
     override fun onResume() {
         Log.d(TAG_LIST, "ContactListFragmentList onResume()")
+        favoriteAdapter?.notifyDataSetChanged()
         groupAdapter?.notifyDataSetChanged()
         super.onResume()
     }
