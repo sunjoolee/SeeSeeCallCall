@@ -1,6 +1,8 @@
 package com.sparta.seeseecallcall
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -83,27 +85,14 @@ class ContactDetailFragment : Fragment() {
                 binding.imgStar.setImageResource(R.drawable.icon_star_gray)
         }
 
-        binding.lyStar.setOnClickListener {
+        binding.btnStar.setOnClickListener {
             ContactManager.toggleFavoriteContact(contactData!!)
             binding.imgStar.setImageResource(
                 if (contactData!!.favorite) R.drawable.icon_star_yellow
                 else R.drawable.icon_star_gray
             )
             onFavoriteChangeListener?.onFavoriteChanged()
-        binding.btnStar.setOnClickListener {
-            contactData?.favorite = contactData?.favorite != true
-            Log.d(Constants.TAG, contactData?.favorite.toString())
-            if (contactData?.favorite == true) {
-                binding.imgStar.setImageResource(R.drawable.icon_star_yellow)
-                ContactManager.contactBookmarkList.add(contactData!!)
-            } else {
-                binding.imgStar.setImageResource(R.drawable.icon_star_gray)
-                ContactManager.contactBookmarkList.remove(contactData!!)
-            }
-            listener?.onFavoriteChanged(contactData!!)
         }
-
-        Log.d("받는 Detail 프래그먼트", contactData?.phoneNumber.toString())
 
         binding.imgBackBtn.setOnClickListener {
             requireFragmentManager().popBackStack()
@@ -113,9 +102,9 @@ class ContactDetailFragment : Fragment() {
             showDeleteDialog()
         }
 
-        binding.btnGunghab.setOnClickListener{
+        binding.btnGunghab.setOnClickListener {
             Log.d("보내는 mbti", contactData?.mbti.toString())
-            if(contactData?.mbti == "????")
+            if (contactData?.mbti == "????")
                 showMysteryMbtiDialog()
             else
                 showMbtiDialog(contactData?.mbti.toString())
@@ -124,20 +113,19 @@ class ContactDetailFragment : Fragment() {
         //메세지 보내기
         binding.lyChat.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
-            val phonnumber = contactData?.phoneNumber
-            intent.data = Uri.parse("smsto:${phonnumber}")
+            intent.data = Uri.parse("smsto:${contactData?.phoneNumber}")
             startActivity(intent)
         }
         //전화걸기
         binding.lyCall.setOnClickListener {
-            val phonnumber = contactData?.phoneNumber
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse(phonnumber))
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse(contactData?.phoneNumber))
             startActivity(intent)
         }
     }
 
     private fun showDeleteDialog() {
-        val deleteDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete, null)
+        val deleteDialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete, null)
 
         val dialog = Dialog(requireContext())
         dialog.setContentView(deleteDialogView)
@@ -158,7 +146,8 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun showMbtiDialog(mbti: String) {
-        val mbtiDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
+        val mbtiDialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
         val typeImage = mbtiDialogView.findViewById<ImageView>(R.id.iv_type)
         val type = mbtiDialogView.findViewById<TextView>(R.id.tv_mbti)
         val shortDesc = mbtiDialogView.findViewById<TextView>(R.id.tv_short_desc)
@@ -183,7 +172,7 @@ class ContactDetailFragment : Fragment() {
         Log.d("받는 mbti", mbti)
         val dialogMbti = MbtiManager.mbtiList.find { it.type == mbti }
         Log.d("변환한 mbti", dialogMbti.toString())
-        dialogMbti?.let{ mbti->
+        dialogMbti?.let { mbti ->
             type.text = mbti.type
             shortDesc.text = mbti.short_description
             longDesc.text = mbti.long_description
@@ -201,7 +190,7 @@ class ContactDetailFragment : Fragment() {
             val compatibilityText = getString(compatibility.textId)
 
             //TODO 궁합 색 바꾸는 부분
-            val colorResId = when(compatibilityText) {
+            val colorResId = when (compatibilityText) {
                 CompatibilityText.BEST.toString() -> R.color.mbti_best
                 CompatibilityText.GOOD.toString() -> R.color.mbti_good
                 CompatibilityText.BAD.toString() -> R.color.mbti_bad
@@ -274,7 +263,8 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun showMysteryMbtiDialog() {
-        val mysteryDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti_default, null)
+        val mysteryDialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti_default, null)
         val compability = mysteryDialogView.findViewById<TextView>(R.id.tv_compability)
 
         val dialog = Dialog(requireContext())
@@ -298,7 +288,6 @@ class ContactDetailFragment : Fragment() {
 
         dialog.show()
     }
-
 
 
     override fun onDestroyView() {
