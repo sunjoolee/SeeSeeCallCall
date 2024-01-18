@@ -20,8 +20,13 @@ import java.util.Locale
 
 class AddContactDialogFragment() : DialogFragment() {
 
+
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
+    interface OnAddContactListner{
+        fun onAddContact()
+    }
+    var addContactListner:OnAddContactListner? = null
 
     private var profileUri: Uri? = null
 
@@ -170,6 +175,8 @@ class AddContactDialogFragment() : DialogFragment() {
                 email = binding.etEmail.text.toString(),
                 birthDate = binding.tvBirthDate.text.toString()
             )
+            addContactListner?.onAddContact()
+
             dismiss()
         }
     }

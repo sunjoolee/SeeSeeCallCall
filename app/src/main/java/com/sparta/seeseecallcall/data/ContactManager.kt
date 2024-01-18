@@ -28,11 +28,8 @@ object ContactManager{
         email: String,
         birthDate: String,
     ){
-        val flag = contactList
-            //.toMutableList()
-            .add(Contact(profileImage,name,mbti,phoneNumber,email,birthDate))
-
-        Log.d(TAG_CONTACT_MANAGER, "add new contact: $flag")
+        contactList.add(Contact(profileImage,name,mbti,phoneNumber,email,birthDate))
+        contactList.sortedBy { it.name }.toMutableList()
         Log.d(TAG_CONTACT_MANAGER, "contactList size: ${contactList.size}")
     }
 
