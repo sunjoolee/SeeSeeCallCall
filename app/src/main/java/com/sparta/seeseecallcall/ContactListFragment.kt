@@ -17,15 +17,15 @@ import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
-class ContactListFragment : Fragment() {
+class ContactListFragment : Fragment(), OnFavoriteChangeListener {
 
+    private val adapter by lazy { MyAdapter(contactList) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-        val adapter = MyAdapter(contactList)
         binding.recyclerviewList.adapter = adapter
         binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
         binding.recyclerviewList.addItemDecoration(
@@ -43,6 +43,7 @@ class ContactListFragment : Fragment() {
                 val contactDetailFragment = ContactDetailFragment.newInstance(contactData)
                 Log.d("보내는 Detail 프래그먼트", contactList[position].mbti)
 
+                contactDetailFragment.listener = this@ContactListFragment
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.nav_host_fragment, contactDetailFragment)
                     .addToBackStack(null)
@@ -86,7 +87,7 @@ class ContactListFragment : Fragment() {
     override fun onResume(){
         Log.d(Constants.TAG_List, "ContactListFragmentList onResume()")
 
-        this.view?.findViewById<RecyclerView>(R.id.recyclerview_list)?.adapter?.notifyDataSetChanged()
+        adapter?.notifyDataSetChanged()
         super.onResume()
     }
 
@@ -100,5 +101,10 @@ class ContactListFragment : Fragment() {
                 if (it.mbti.contains(searchText.toUpperCase())) add(it)
             }
         }
+    }
+
+    override fun onFavoriteChanged(contact: Contact) {
+        val changedPosition = contactList.indexOf(contact)
+        adapter.notifyItemChanged(changedPosition)
     }
 }

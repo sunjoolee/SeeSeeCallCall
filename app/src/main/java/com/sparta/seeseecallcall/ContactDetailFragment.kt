@@ -13,13 +13,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
 
-
+interface OnFavoriteChangeListener{
+    fun onFavoriteChanged(contact: Contact)
+}
 class ContactDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentContactDetailBinding
     private var contactData: Contact? = null
+    var listener: OnFavoriteChangeListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +69,12 @@ class ContactDetailFragment : Fragment() {
             Log.d(Constants.TAG, contactData?.favorite.toString())
             if (contactData?.favorite == true) {
                 binding.imgStar.setImageResource(R.drawable.icon_star_yellow)
+                ContactManager.contactBookmarkList.add(contactData!!)
             } else {
                 binding.imgStar.setImageResource(R.drawable.icon_star_gray)
+                ContactManager.contactBookmarkList.remove(contactData!!)
             }
+            listener?.onFavoriteChanged(contactData!!)
         }
 
         Log.d("받는 Detail 프래그먼트", contactData?.phoneNumber.toString())
@@ -82,23 +89,23 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun showDeleteDialog() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
 
         val dialog = Dialog(requireContext())
         dialog.setContentView(dialogView)
-        dialog.setContentView(R.layout.dialog_delete)
+        dialog.setContentView(R.layout.dialog_mbti)
         dialog.setCanceledOnTouchOutside(false)
 
         val closeBtn = dialogView.findViewById<Button>(R.id.btn_close)
-        val confirmBtn = dialogView.findViewById<Button>(R.id.btn_confirm)
+//        val confirmBtn = dialogView.findViewById<Button>(R.id.btn_confirm)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         closeBtn.setOnClickListener {
             dialog.dismiss()
         }
-        confirmBtn.setOnClickListener {
-
-        }
+//        confirmBtn.setOnClickListener {
+//
+//        }
 
         dialog.show()
     }
