@@ -17,28 +17,26 @@ import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
-class ContactListFragment : Fragment() {
+class ContactListFragment : Fragment(), OnFavoriteChangeListener {
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
 
+    private val adapter by lazy { MyAdapter(contactList) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-        val adapter = MyAdapter(contactList)
-        binding.run {
-            recyclerviewList.adapter = adapter
-            recyclerviewList.layoutManager = LinearLayoutManager(context)
-            recyclerviewList.addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    LinearLayout.VERTICAL
-                )
+        binding.recyclerviewList.adapter = adapter
+        binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerviewList.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayout.VERTICAL
             )
-        }
+        )
 
         adapter.itemClick = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
@@ -48,6 +46,7 @@ class ContactListFragment : Fragment() {
                 val contactDetailFragment = ContactDetailFragment.newInstance(contactData)
                 Log.d("보내는 Detail 프래그먼트", contactList[position].mbti)
 
+                contactDetailFragment.listener = this@ContactListFragment
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.nav_host_fragment, contactDetailFragment)
                     .addToBackStack(null)
@@ -56,11 +55,17 @@ class ContactListFragment : Fragment() {
             }
 
             override fun onStarClick(view: View, position: Int) {
+                Log.d(Constants.TAG, contactList[position].favorite.toString())
                 contactList[position].run {
                     favorite = !favorite
-
-                    if (favorite) contactBookmarkList.add(this)
-                    else contactBookmarkList.remove(this)
+                    if (favorite) {
+                        contactBookmarkList.add(this)
+                        contactList[position].favorite = true
+                    }
+                    else {
+                        contactBookmarkList.remove(this)
+                        contactList[position].favorite = false
+                    }
                 }
                 contactBookmarkList.sortBy { it.name }
                 adapter.notifyDataSetChanged()
@@ -101,6 +106,7 @@ class ContactListFragment : Fragment() {
     override fun onResume(){
         Log.d(TAG_LIST, "ContactListFragmentList onResume()")
 
+        adapter?.notifyDataSetChanged()
         binding.recyclerviewList.adapter?.notifyDataSetChanged()
         super.onResume()
     }
@@ -115,5 +121,10 @@ class ContactListFragment : Fragment() {
                 if (it.mbti.contains(searchText.toUpperCase())) add(it)
             }
         }
+    }
+
+    override fun onFavoriteChanged(contact: Contact) {
+        val changedPosition = contactList.indexOf(contact)
+        adapter.notifyItemChanged(changedPosition)
     }
 }

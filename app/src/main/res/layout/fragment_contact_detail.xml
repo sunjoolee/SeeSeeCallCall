@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/sample11"
+            android:src="@drawable/profile_bf"
             android:background="#AFC5DD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +37,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/img_star"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/star"
+                android:src="@drawable/icon_star_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/ly_star"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/gradation"
+            android:src="@drawable/profile_gradation"
             app:layout_constraintBottom_toBottomOf="@+id/img_detailprofil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -73,10 +74,11 @@
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/shap2"
+            android:background="@drawable/rounded_shape_20"
             android:backgroundTint="#6ECA59"
             android:gravity="center"
             android:text="ENTP"
+            android:textSize="18sp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/tv_Detailname"
             app:layout_constraintEnd_toStartOf="@+id/tv_Detailname"
@@ -102,10 +104,10 @@
                     android:id="@+id/img_chat"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/circle_shape"
                     android:backgroundTint="#8DBAFE"
                     android:padding="10dp"
-                    android:src="@drawable/chat"
+                    android:src="@drawable/btn_chat"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -137,7 +139,7 @@
                     android:id="@+id/img_call"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/circle_shape"
                     android:backgroundTint="#8DBAFE"
                     android:padding="12dp"
                     android:src="@drawable/btn_call"
@@ -172,10 +174,10 @@
                     android:id="@+id/img_gunghab"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/circle_shape"
                     android:backgroundTint="#8DBAFE"
                     android:padding="12dp"
-                    android:src="@drawable/gunghab"
+                    android:src="@drawable/btn_gunghab"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -198,7 +200,7 @@
                 android:layout_width="350dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/shap2"
+                android:background="@drawable/rounded_shape_20"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -232,7 +234,7 @@
                 android:layout_width="350dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/shap2"
+                android:background="@drawable/rounded_shape_20"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -266,7 +268,7 @@
                 android:layout_width="350dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/shap2"
+                android:background="@drawable/rounded_shape_20"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -296,6 +298,7 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_delete"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -323,11 +326,12 @@
     </ScrollView>
 
     <ImageView
+        android:id="@+id/img_back_btn"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:src="@drawable/leftarrow"
+        android:src="@drawable/btn_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -6,4 +6,5 @@ object Constants {
     const val TAG_CONTACT_MANAGER = "ContactManager"
     const val TAG_ADD_CONTACT = "AddContactDialogFragment"
     const val TAG_LIST = "ContactListFragment"
+    const val TAG = "TAG"
 }
