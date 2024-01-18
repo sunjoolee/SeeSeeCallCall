@@ -60,6 +60,14 @@ object ContactGroupManager {
         }!!.contactList.add(newContact)
     }
 
+    fun deleteContact(contact:Contact){
+        if(contact.favorite)
+            ContactManager.contactBookmarkList.remove(contact)
+        contactGroupList.find {
+            it.groupName == getContactGroupName(contact)
+        }!!.contactList.remove(contact)
+    }
+
     private fun initContactList(): MutableList<Contact> = mutableListOf<Contact>(
         Contact(
             name = "정정원",
