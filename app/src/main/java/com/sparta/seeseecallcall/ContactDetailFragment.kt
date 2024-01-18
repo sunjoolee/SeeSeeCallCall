@@ -2,8 +2,11 @@ package com.sparta.seeseecallcall
 
 import android.app.Dialog
 import android.content.Context
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -112,6 +115,20 @@ class ContactDetailFragment : Fragment() {
                 showMysteryMbtiDialog()
             else
                 showMbtiDialog(contactData?.mbti.toString())
+        }
+
+        //메세지 보내기
+        binding.lyChat.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            val phonnumber = contactData?.phoneNumber
+            intent.data = Uri.parse("smsto:${phonnumber}")
+            startActivity(intent)
+        }
+        //전화걸기
+        binding.lyCall.setOnClickListener {
+            val phonnumber = contactData?.phoneNumber
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse(phonnumber))
+            startActivity(intent)
         }
     }
 

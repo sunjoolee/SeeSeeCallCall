@@ -6,13 +6,14 @@ import com.sparta.seeseecallcall.Constants.TAG_CONTACT_MANAGER
 import java.lang.Exception
 
 object ContactManager{
-    val myContact = Contact(
+    var myContact = Contact(
         name="아이유",
         mbti= "INFJ",
         phoneNumber = "010-1234-1234",
         birthDate = "1993/05/16",
         email = "iu@gamil.com"
     )
+
 
     val contactList:MutableList<Contact> = getDefaultContactList()
         .sortedBy { it.name }.toMutableList()
