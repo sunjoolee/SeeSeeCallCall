@@ -76,7 +76,7 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
                 if (contact.profileImage != null)
                     setImageURI(contact.profileImage)
                 else if (contact.mbti == "????")
-                    setImageResource(R.drawable.profile_default)
+                    setImageResource(R.drawable.profile_mbti)
                 else
                     setImageResource(
                         resources.getIdentifier(
