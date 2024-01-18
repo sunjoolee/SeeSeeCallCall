@@ -11,7 +11,7 @@
     <string name="email">이메일</string>
 
     <string-array name="spinner_mbti">
-        <item>/?/?/?/?</item>
+        <item>\????</item>
         <item>INFP</item>
         <item>ENFP</item>
         <item>INFJ</item>

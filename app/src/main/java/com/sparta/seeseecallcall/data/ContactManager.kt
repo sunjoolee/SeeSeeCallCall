@@ -1,6 +1,9 @@
 package com.sparta.seeseecallcall.data
 
 import android.net.Uri
+import android.util.Log
+import com.sparta.seeseecallcall.Constants.TAG_CONTACT_MANAGER
+import java.lang.Exception
 
 object ContactManager{
     val myContact = Contact(
@@ -11,9 +14,27 @@ object ContactManager{
         email = "iu@gamil.com"
     )
 
+    val contactList:MutableList<Contact> = getDefaultContactList()
+        .sortedBy { it.name }.toMutableList()
 
-    val contactList = getDefaultContactList().sortedBy { it.name } as MutableList<Contact>
-    val contactBookmarkList = contactList.filter { it.favorite } as MutableList<Contact>
+    val contactBookmarkList:MutableList<Contact> = contactList
+        .filter { it.favorite }.toMutableList()
+
+    fun addNewContact(
+        profileImage: Uri? = null,
+        name: String,
+        mbti: String = "????",
+        phoneNumber: String,
+        email: String,
+        birthDate: String,
+    ){
+        val flag = contactList
+            //.toMutableList()
+            .add(Contact(profileImage,name,mbti,phoneNumber,email,birthDate))
+
+        Log.d(TAG_CONTACT_MANAGER, "add new contact: $flag")
+        Log.d(TAG_CONTACT_MANAGER, "contactList size: ${contactList.size}")
+    }
 
     private fun getDefaultContactList():MutableList<Contact> = mutableListOf<Contact>(
         Contact(
