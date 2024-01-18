@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sparta.seeseecallcall.Constants.TAG_LIST
 import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
+import com.sparta.seeseecallcall.data.ContactBookmarkManager.contactBookmarkList
+import com.sparta.seeseecallcall.data.ContactGroupManager
 import com.sparta.seeseecallcall.data.ContactGroupManager.contactGroupList
-import com.sparta.seeseecallcall.data.ContactManager
-import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment(),
@@ -51,7 +52,7 @@ class ContactListFragment : Fragment(),
             }
 
             override fun onStarClick(view: View, contact: Contact) {
-                ContactManager.toggleFavoriteContact(contact)
+                ContactBookmarkManager.toggleFavoriteContact(contact)
                 onFavoriteChanged()
             }
 
@@ -78,15 +79,15 @@ class ContactListFragment : Fragment(),
                 Log.d(TAG_LIST, "afterTextChanged, ${text.toString()}")
 
                 //즐겨찾기 리싸이클러뷰 검색 결과 필터링하기
-//               adapter.changeDataset(
-//                    if (text.isNullOrBlank()) contactList
-//                    else getFilteredList(text.toString())
-//                )
+               favoriteAdapter.changeDataset(
+                    if (text.isNullOrBlank()) contactBookmarkList
+                    else ContactBookmarkManager.getFilteredList(text.toString())
+                )
                 //연락처 그룹 리싸이클러뷰 검색 결과 필터링하기
-//                adapter.changeDataset(
-//                    if (text.isNullOrBlank()) contactList
-//                    else getFilteredList(text.toString())
-//                )
+                groupAdapter.changeDataset(
+                    if (text.isNullOrBlank()) contactGroupList
+                    else ContactGroupManager.getFilteredGroupList(text.toString())
+                )
             }
         })
 
@@ -127,16 +128,5 @@ class ContactListFragment : Fragment(),
         super.onResume()
     }
 
-//    private fun getFilteredList(searchText: String): MutableList<Contact> {
-//        val filteredList = mutableListOf<Contact>()
-//        return filteredList.apply {
-//            contactList.forEach {
-//                //이름으로 검색
-//                if (it.name.contains(searchText)) add(it)
-//                //mbti로 검색
-//                if (it.mbti.contains(searchText.toUpperCase())) add(it)
-//            }
-//        }
-//    }
 
 }
