@@ -19,9 +19,14 @@ object MbtiManager {
         return CompatibilityText.UN_KNOWN
     }
 
-    fun getCompatibilityColor(mbti:String){
-        //TODO getCompatibility() 결과에 기반하여 궁합 색 리소스 ID 반환
-    }
+    fun getCompatibilityColor(mbti:String):Int =
+        when(getCompatibility(mbti)){
+            CompatibilityText.UN_KNOWN -> CompatibilityColor.UN_KNOWN.color
+            CompatibilityText.BEST -> CompatibilityColor.BEST.color
+            CompatibilityText.GOOD -> CompatibilityColor.GOOD.color
+            CompatibilityText.SOSO -> CompatibilityColor.SOSO.color
+            CompatibilityText.BAD -> CompatibilityColor.BAD.color
+        }
 
     private fun initMbtiList():List<Mbti> = listOf(
         Mbti( //1. INFP

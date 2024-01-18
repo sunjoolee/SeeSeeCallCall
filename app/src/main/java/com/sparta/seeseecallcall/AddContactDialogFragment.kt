@@ -1,24 +1,56 @@
 package com.sparta.seeseecallcall
 
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
-import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
-import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class AddContactDialogFragment() : DialogFragment() {
 
+
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
+
+    interface OnAddContactListner {
+        fun onAddContact()
+    }
+
+    var addContactListner: OnAddContactListner? = null
+
+    private var imageUri: Uri? = null
+    private val imageIntentLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            imageUri = it.data?.data
+            activity?.grantUriPermission(
+                "com.sparta.seeseecallcall",
+                imageUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            binding.imgProfile.setImageURI(imageUri)
+            binding.imgProfile.clipToOutline = true
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,9 +64,13 @@ class AddContactDialogFragment() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNav?.visibility = View.GONE
+
         initProfileImageButton()
 
         initMbtiSpinner()
+        initBirthDateDialog()
 
         initCancelButton()
         initOkayButton()
@@ -42,7 +78,28 @@ class AddContactDialogFragment() : DialogFragment() {
 
     private fun initProfileImageButton() {
         binding.imgProfile.setOnClickListener {
-            //TODO 갤러리에서 사진 가져오기
+            if (imageUri != null) { //이미 프로필 사진이 있는 경우, 프로필 삭제
+                imageUri = null
+
+                val mbti = binding.spinnerMbti.selectedItem.toString()
+                binding.imgProfile.setImageResource(
+                    if (mbti == "????") R.drawable.profile_mbti
+                    else resources.getIdentifier(
+                        "profile_${mbti.toLowerCase()}",
+                        "drawable",
+                        "com.sparta.seeseecallcall"
+                    )
+                )
+                binding.imgProfile.clipToOutline = true
+
+                return@setOnClickListener
+            }
+            //갤러리에서 프로필 사진 가져오기
+            val imageIntent = Intent(
+                Intent.ACTION_GET_CONTENT,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI
+            )
+            imageIntentLauncher.launch(imageIntent)
         }
     }
 
@@ -52,12 +109,64 @@ class AddContactDialogFragment() : DialogFragment() {
             R.array.spinner_mbti,
             R.layout.spinner_text
         ).also { adapter ->
-            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerMbti.adapter = adapter
+        }
+
+        binding.spinnerMbti.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (imageUri != null) return
+
+                    binding.imgProfile.setImageResource(
+                        if (position == 0) R.drawable.profile_mbti
+                        else resources.getIdentifier(
+                            "profile_${
+                                binding.spinnerMbti.getItemAtPosition(position).toString()
+                                    .toLowerCase()
+                            }",
+                            "drawable",
+                            "com.sparta.seeseecallcall"
+                        )
+                    )
+                    binding.imgProfile.clipToOutline = true
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                    if (imageUri != null) return
+                    else binding.imgProfile.setImageResource(R.drawable.profile_mbti)
+                    binding.imgProfile.clipToOutline = true
+                }
+            }
+    }
+
+    private fun initBirthDateDialog() {
+        binding.tvBirthDate.setOnClickListener {
+            val cal = Calendar.getInstance()
+            DatePickerDialog(
+                requireContext(),
+                { _, year, month, day ->
+                    val selectedDate = Calendar.getInstance().apply {
+                        set(year, month, day)
+                    }
+                    val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+                    binding.tvBirthDate.text = dateFormat.format(selectedDate.time)
+                },
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).run {
+                datePicker.maxDate = Date().time
+                show()
+            }
         }
     }
 
-        private fun initCancelButton() {
+    private fun initCancelButton() {
         binding.btnCancel.setOnClickListener {
             Log.d(TAG_ADD_CONTACT, "cancel button clicked")
             dismiss()
@@ -95,19 +204,19 @@ class AddContactDialogFragment() : DialogFragment() {
             Log.d(TAG_ADD_CONTACT, "ok button clicked")
 
             //유효성 검사
-           with(getNameError(binding.etName.text.toString())){
-               if (this != ErrorMsg.PASS) {
-                   binding.tvError.setText(this.id)
-                   return@setOnClickListener
-               }
-           }
-            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())){
+            with(getNameError(binding.etName.text.toString())) {
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
                 }
             }
-            with(getEmailError(binding.etEmail.text.toString())){
+            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())) {
+                if (this != ErrorMsg.PASS) {
+                    binding.tvError.setText(this.id)
+                    return@setOnClickListener
+                }
+            }
+            with(getEmailError(binding.etEmail.text.toString())) {
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
@@ -115,17 +224,22 @@ class AddContactDialogFragment() : DialogFragment() {
             }
 
             ContactManager.addNewContact(
-                profileImage = null, //TODO 프로필 사진 등록
+                profileImage = imageUri,
                 name = binding.etName.text.toString(),
                 mbti = binding.spinnerMbti.selectedItem.toString(),
                 phoneNumber = binding.etPhoneNumber.text.toString(),
                 email = binding.etEmail.text.toString(),
-                birthDate = "0000/00/00" //TODO 생일 등록
+                birthDate = binding.tvBirthDate.text.toString()
             )
+            addContactListner?.onAddContact()
+
             dismiss()
         }
     }
 
-
-
+    override fun onDestroyView() {
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNav?.visibility = View.VISIBLE
+        super.onDestroyView()
+    }
 }
