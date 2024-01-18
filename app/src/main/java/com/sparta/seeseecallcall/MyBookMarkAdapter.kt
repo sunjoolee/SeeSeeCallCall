@@ -92,10 +92,7 @@ class MyBookMarkAdapter(private var dataset: MutableList<Contact>) :
                     if (contact.mbti == "????") {
                         CompatibilityColor.UN_KNOWN.color
                     } else {
-                        val contactId: Int = MbtiManager.mbtiId[contact.mbti] ?: 0
-                        val myId: Int = MbtiManager.mbtiId[ContactManager.myContact.mbti] ?: 0
-
-                        MbtiManager.compatibilityColor[contactId][myId].color
+                        MbtiManager.getCompatibilityColor(contact.mbti)
                     }
                 )
             )
