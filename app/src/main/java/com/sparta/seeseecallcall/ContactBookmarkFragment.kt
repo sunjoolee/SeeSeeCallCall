@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
@@ -19,7 +18,7 @@ import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
 
-    private val adapter by lazy { MyAdapter(contactBookmarkList) }
+    private val adapter by lazy { MyBookMarkAdapter(contactBookmarkList) }
     private val TAG = "ContactBookmarkFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +30,18 @@ class ContactBookmarkFragment : Fragment() {
     ): View? {
         val binding = FragmentContactBookmarkBinding.inflate(inflater, container, false)
 
-        binding.recyclerviewBookmark.adapter = adapter
-        binding.recyclerviewBookmark.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewBookmark.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+        val itemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
+        binding.recyclerviewBookmark.addItemDecoration(itemDecoration)
 
-        adapter.itemClick = object : MyAdapter.ItemClick{
+        if (binding.recyclerviewBookmark.itemDecorationCount > 0) {
+            binding.recyclerviewBookmark.removeItemDecorationAt(0)
+        }
+
+        binding.recyclerviewBookmark.adapter = adapter
+        binding.recyclerviewBookmark.layoutManager = GridLayoutManager(context, 2)
+
+
+        adapter.itemClick = object : MyBookMarkAdapter.ItemClick{
             override fun onClick(view: View, position: Int) {
                 Log.d(TAG, "position: $position")
                 //TODO 연락처 객체 넘기며, 연락처 상세 페이지로 이동
