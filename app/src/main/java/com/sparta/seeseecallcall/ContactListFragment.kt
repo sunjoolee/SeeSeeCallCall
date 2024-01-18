@@ -94,9 +94,11 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener, AddContactDial
         binding.floatingBtn.setOnClickListener {
             Log.d(TAG_LIST, "floating action button clicked")
 
+            val addContactFragment = AddContactDialogFragment()
+            addContactFragment.addContactListner = this@ContactListFragment
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .add(R.id.nav_host_fragment,AddContactDialogFragment())
+                .add(R.id.nav_host_fragment,addContactFragment)
                 .addToBackStack(null)
                 .commit()
         }
@@ -108,7 +110,7 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener, AddContactDial
     }
 
     override fun onAddContact() {
-        Log.d(TAG_LIST, "ContactListFragmentList oaAddContact")
+        Log.d(TAG_LIST, "ContactListFragmentList onAddContact")
         adapter?.notifyDataSetChanged()
     }
 

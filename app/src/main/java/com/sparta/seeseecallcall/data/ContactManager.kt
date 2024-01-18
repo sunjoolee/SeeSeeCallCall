@@ -29,7 +29,8 @@ object ContactManager{
         birthDate: String,
     ){
         contactList.add(Contact(profileImage,name,mbti,phoneNumber,email,birthDate))
-        contactList.sortedBy { it.name }.toMutableList()
+        contactList.sortBy { it.name }
+
         Log.d(TAG_CONTACT_MANAGER, "contactList size: ${contactList.size}")
     }
 
