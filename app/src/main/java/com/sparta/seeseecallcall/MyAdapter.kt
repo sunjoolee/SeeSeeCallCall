@@ -17,7 +17,6 @@ import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
 
 class MyAdapter(private var dataset: MutableList<Contact>) :
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
-    private val TAG = "MyAdapter"
 
     interface ItemClick {
         fun onClick(view: View, position: Int)
@@ -95,14 +94,7 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
             mbtiTextView.background.setTint(
                 getColor(
                     holder.itemView.context,
-                    if (contact.mbti == "????") {
-                        CompatibilityColor.UN_KNOWN.color
-                    } else {
-                        val contactId: Int = MbtiManager.mbtiId[contact.mbti] ?: 0
-                        val myId: Int = MbtiManager.mbtiId[ContactManager.myContact.mbti] ?: 0
-
-                        MbtiManager.compatibilityColor[contactId][myId].color
-                    }
+                    MbtiManager.getCompatibilityColor(contact.mbti)
                 )
             )
 

@@ -17,7 +17,7 @@ import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
 import com.sparta.seeseecallcall.data.ContactManager.contactList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
-class ContactListFragment : Fragment(), OnFavoriteChangeListener {
+class ContactListFragment : Fragment(), OnFavoriteChangeListener, AddContactDialogFragment.OnAddContactListner {
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
@@ -94,9 +94,11 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener {
         binding.floatingBtn.setOnClickListener {
             Log.d(TAG_LIST, "floating action button clicked")
 
+            val addContactFragment = AddContactDialogFragment()
+            addContactFragment.addContactListner = this@ContactListFragment
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .add(R.id.nav_host_fragment,AddContactDialogFragment())
+                .add(R.id.nav_host_fragment,addContactFragment)
                 .addToBackStack(null)
                 .commit()
         }
@@ -106,9 +108,14 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener {
         val changedPosition = contactList.indexOf(contact)
         adapter.notifyItemChanged(changedPosition)
     }
+
+    override fun onAddContact() {
+        Log.d(TAG_LIST, "ContactListFragmentList onAddContact")
+        adapter?.notifyDataSetChanged()
+    }
+
     override fun onResume(){
         Log.d(TAG_LIST, "ContactListFragmentList onResume()")
-
         adapter?.notifyDataSetChanged()
         super.onResume()
     }
