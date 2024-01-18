@@ -38,11 +38,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_bookmark"
-        android:layout_width="match_parent"
-        tools:listitem="@layout/recycler_view_item"
-        android:layout_height="0dp"
+        android:layout_width="413dp"
+        android:layout_height="590dp"
         android:layout_marginTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingStart="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_search_bar" />
+        app:layout_constraintTop_toBottomOf="@id/layout_search_bar"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:listitem="@layout/bookmark_recycler_view_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

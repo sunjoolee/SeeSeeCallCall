@@ -54,4 +54,9 @@
     <string name="compatibility_bad">최악</string>
     <string name="compatibility_unknown">알수없음</string>
 
+    <string name="mbti_compatibility">내 MBTI와의 궁합은 %1$s 입니다.</string>
+    <string name="best_compatibility_text">ISTJ 천생연분 궁합</string>
+    <string name="compatibility_good_text">ISTJ 좋은 궁합</string>
+    <string name="compatibility_bad_text">ISTJ 최악 궁합</string>
+
 </resources>

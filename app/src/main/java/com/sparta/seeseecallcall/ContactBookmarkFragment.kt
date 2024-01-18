@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
@@ -19,9 +18,8 @@ import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
 
-    private val adapter by lazy { MyAdapter(contactBookmarkList) }
+    private val adapter by lazy { MyBookMarkAdapter(contactBookmarkList) }
     private val TAG = "ContactBookmarkFragment"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,9 +30,15 @@ class ContactBookmarkFragment : Fragment() {
     ): View? {
         val binding = FragmentContactBookmarkBinding.inflate(inflater, container, false)
 
+        val itemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
+        binding.recyclerviewBookmark.addItemDecoration(itemDecoration)
+
+        if (binding.recyclerviewBookmark.itemDecorationCount > 0) {
+            binding.recyclerviewBookmark.removeItemDecorationAt(0)
+        }
+
         binding.recyclerviewBookmark.adapter = adapter
-        binding.recyclerviewBookmark.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewBookmark.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+        binding.recyclerviewBookmark.layoutManager = GridLayoutManager(context, 2)
 
         adapter.itemClick = object : MyAdapter.ItemClick{
             override fun onClick(view: View, contact:Contact) {
@@ -63,6 +67,7 @@ class ContactBookmarkFragment : Fragment() {
 
     override fun onResume(){
         Log.d(TAG, "ContactBookmarkFragmentList onResume()")
+
         adapter?.notifyDataSetChanged()
         super.onResume()
     }
