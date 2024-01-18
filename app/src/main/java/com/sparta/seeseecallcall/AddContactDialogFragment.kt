@@ -1,15 +1,18 @@
 package com.sparta.seeseecallcall
 
-import android.app.AlertDialog
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
@@ -32,7 +35,22 @@ class AddContactDialogFragment() : DialogFragment() {
 
     var addContactListner: OnAddContactListner? = null
 
-    private var profileUri: Uri? = null
+    private var imageUri: Uri? = null
+    private val imageIntentLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            imageUri = it.data?.data
+            activity?.grantUriPermission(
+                "com.sparta.seeseecallcall",
+                imageUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            binding.imgProfile.setImageURI(imageUri)
+            binding.imgProfile.clipToOutline = true
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +78,28 @@ class AddContactDialogFragment() : DialogFragment() {
 
     private fun initProfileImageButton() {
         binding.imgProfile.setOnClickListener {
-            //TODO 갤러리에서 사진 가져오기
+            if (imageUri != null) { //이미 프로필 사진이 있는 경우, 프로필 삭제
+                imageUri = null
+
+                val mbti = binding.spinnerMbti.selectedItem.toString()
+                binding.imgProfile.setImageResource(
+                    if (mbti == "????") R.drawable.profile_mbti
+                    else resources.getIdentifier(
+                        "profile_${mbti.toLowerCase()}",
+                        "drawable",
+                        "com.sparta.seeseecallcall"
+                    )
+                )
+                binding.imgProfile.clipToOutline = true
+
+                return@setOnClickListener
+            }
+            //갤러리에서 프로필 사진 가져오기
+            val imageIntent = Intent(
+                Intent.ACTION_GET_CONTENT,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI
+            )
+            imageIntentLauncher.launch(imageIntent)
         }
     }
 
@@ -73,34 +112,36 @@ class AddContactDialogFragment() : DialogFragment() {
             binding.spinnerMbti.adapter = adapter
         }
 
-        binding.spinnerMbti.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (profileUri != null) return
+        binding.spinnerMbti.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (imageUri != null) return
 
-                binding.imgProfile.setImageResource(
-                    if (position == 0) R.drawable.profile_mbti
-                    else resources.getIdentifier(
-                        "profile_${
-                            binding.spinnerMbti.getItemAtPosition(position).toString().toLowerCase()
-                        }",
-                        "drawable",
-                        "com.sparta.seeseecallcall"
+                    binding.imgProfile.setImageResource(
+                        if (position == 0) R.drawable.profile_mbti
+                        else resources.getIdentifier(
+                            "profile_${
+                                binding.spinnerMbti.getItemAtPosition(position).toString()
+                                    .toLowerCase()
+                            }",
+                            "drawable",
+                            "com.sparta.seeseecallcall"
+                        )
                     )
-                )
-                binding.imgProfile.clipToOutline = true
-            }
+                    binding.imgProfile.clipToOutline = true
+                }
 
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                if (profileUri != null) return
-                else binding.imgProfile.setImageResource(R.drawable.profile_mbti)
-                binding.imgProfile.clipToOutline = true
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                    if (imageUri != null) return
+                    else binding.imgProfile.setImageResource(R.drawable.profile_mbti)
+                    binding.imgProfile.clipToOutline = true
+                }
             }
-        }
     }
 
     private fun initBirthDateDialog() {
@@ -183,7 +224,7 @@ class AddContactDialogFragment() : DialogFragment() {
             }
 
             ContactManager.addNewContact(
-                profileImage = profileUri,
+                profileImage = imageUri,
                 name = binding.etName.text.toString(),
                 mbti = binding.spinnerMbti.selectedItem.toString(),
                 phoneNumber = binding.etPhoneNumber.text.toString(),
