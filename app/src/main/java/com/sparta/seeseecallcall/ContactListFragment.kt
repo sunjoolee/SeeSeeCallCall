@@ -77,9 +77,13 @@ class ContactListFragment : Fragment(),
             override fun afterTextChanged(text: Editable?) {
                 Log.d(TAG_LIST, "afterTextChanged, ${text.toString()}")
 
-                //TODO 즐겨찾기 리싸이클러뷰 검색 결과 필터링하기
-                //TODO 연락처 그룹 리싸이클러뷰 검색 결과 필터링하기
+                //즐겨찾기 리싸이클러뷰 검색 결과 필터링하기
 //               adapter.changeDataset(
+//                    if (text.isNullOrBlank()) contactList
+//                    else getFilteredList(text.toString())
+//                )
+                //연락처 그룹 리싸이클러뷰 검색 결과 필터링하기
+//                adapter.changeDataset(
 //                    if (text.isNullOrBlank()) contactList
 //                    else getFilteredList(text.toString())
 //                )
