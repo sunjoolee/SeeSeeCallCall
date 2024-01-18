@@ -50,9 +50,9 @@ class AddContactDialogFragment() : DialogFragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.spinner_mbti,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_text
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerMbti.adapter = adapter
         }
     }
