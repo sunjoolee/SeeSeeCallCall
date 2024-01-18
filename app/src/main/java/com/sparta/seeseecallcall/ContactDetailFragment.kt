@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
 
 interface OnFavoriteChangeListener{
@@ -64,7 +66,7 @@ class ContactDetailFragment : Fragment() {
                 binding.imgStar.setImageResource(R.drawable.icon_star_gray)
         }
 
-        binding.lyStar.setOnClickListener {
+        binding.btnStar.setOnClickListener {
             contactData?.favorite = contactData?.favorite != true
             Log.d(Constants.TAG, contactData?.favorite.toString())
             if (contactData?.favorite == true) {
@@ -83,29 +85,79 @@ class ContactDetailFragment : Fragment() {
             requireFragmentManager().popBackStack()
         }
 
-        binding.lyDelete.setOnClickListener {
+        binding.btnDelete.setOnClickListener {
             showDeleteDialog()
+        }
+
+        binding.btnGunghab.setOnClickListener{
+            Log.d("보내는 mbti", contactData?.mbti.toString())
+            showMbtiDialog(contactData?.mbti.toString())
         }
     }
 
     private fun showDeleteDialog() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
+        val deleteDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete, null)
 
         val dialog = Dialog(requireContext())
-        dialog.setContentView(dialogView)
-        dialog.setContentView(R.layout.dialog_mbti)
-        dialog.setCanceledOnTouchOutside(false)
+        dialog.setContentView(deleteDialogView)
+        dialog.setContentView(R.layout.dialog_delete)
 
-        val closeBtn = dialogView.findViewById<Button>(R.id.btn_close)
-//        val confirmBtn = dialogView.findViewById<Button>(R.id.btn_confirm)
+        val closeBtn = deleteDialogView.findViewById<Button>(R.id.btn_close)
+        val confirmBtn = deleteDialogView.findViewById<Button>(R.id.btn_confirm)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         closeBtn.setOnClickListener {
             dialog.dismiss()
         }
-//        confirmBtn.setOnClickListener {
-//
-//        }
+        confirmBtn.setOnClickListener {
+
+        }
+
+        dialog.show()
+    }
+
+    private fun showMbtiDialog(mbti: String) {
+        val mbtiDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
+        val typeImage = mbtiDialogView.findViewById<ImageView>(R.id.iv_type)
+        val type = mbtiDialogView.findViewById<TextView>(R.id.tv_mbti)
+        val shortDesc = mbtiDialogView.findViewById<TextView>(R.id.tv_short_desc)
+        val longDesc = mbtiDialogView.findViewById<TextView>(R.id.tv_long_desc)
+//        val bestComp = mbtiDialogView.findViewById<TextView>(R.id.tv_mbti)
+//        val goodComp = mbtiDialogView.findViewById<TextView>(R.id.tv_mbti)
+//        val badComp = mbtiDialogView.findViewById<TextView>(R.id.tv_mbti)
+        //이미지도 필요
+
+        typeImage.clipToOutline = true
+
+
+
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(mbtiDialogView)
+//        dialog.setContentView(R.layout.dialog_mbti)
+
+        val closeBtn = mbtiDialogView.findViewById<Button>(R.id.btn_close)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        Log.d("받는 mbti", mbti)
+        val mbti = MbtiManager.mbtiList.find { it.type == mbti }
+        mbti?.let{
+            type.text = mbti.type
+            shortDesc.text = mbti.short_description
+            longDesc.text = mbti.long_description
+            if (mbti.type == "????")
+                typeImage.setImageResource(R.drawable.profile_mbti)
+            else
+                typeImage.setImageResource(
+                    resources.getIdentifier(
+                        "profile_${mbti.toString().toLowerCase()}",
+                        "drawable",
+                        "com.sparta.seeseecallcall"
+                    )
+                )
+        }
+        closeBtn.setOnClickListener {
+            dialog.dismiss()
+        }
 
         dialog.show()
     }
