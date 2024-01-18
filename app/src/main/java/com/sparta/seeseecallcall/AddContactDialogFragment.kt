@@ -1,5 +1,6 @@
 package com.sparta.seeseecallcall
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.net.Uri
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class AddContactDialogFragment() : DialogFragment() {
@@ -23,10 +25,12 @@ class AddContactDialogFragment() : DialogFragment() {
 
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
-    interface OnAddContactListner{
+
+    interface OnAddContactListner {
         fun onAddContact()
     }
-    var addContactListner:OnAddContactListner? = null
+
+    var addContactListner: OnAddContactListner? = null
 
     private var profileUri: Uri? = null
 
@@ -69,24 +73,32 @@ class AddContactDialogFragment() : DialogFragment() {
             binding.spinnerMbti.adapter = adapter
         }
 
-        binding.spinnerMbti.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        binding.spinnerMbti.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 if (profileUri != null) return
 
                 binding.imgProfile.setImageResource(
                     if (position == 0) R.drawable.profile_mbti
                     else resources.getIdentifier(
-                        "profile_${binding.spinnerMbti.getItemAtPosition(position).toString().toLowerCase()}",
+                        "profile_${
+                            binding.spinnerMbti.getItemAtPosition(position).toString().toLowerCase()
+                        }",
                         "drawable",
                         "com.sparta.seeseecallcall"
                     )
                 )
-                binding.imgProfile.clipToOutline= true
+                binding.imgProfile.clipToOutline = true
             }
+
             override fun onNothingSelected(adapterView: AdapterView<*>?) {
                 if (profileUri != null) return
                 else binding.imgProfile.setImageResource(R.drawable.profile_mbti)
-                binding.imgProfile.clipToOutline= true
+                binding.imgProfile.clipToOutline = true
             }
         }
     }
@@ -106,7 +118,10 @@ class AddContactDialogFragment() : DialogFragment() {
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            ).run {
+                datePicker.maxDate = Date().time
+                show()
+            }
         }
     }
 
@@ -180,6 +195,7 @@ class AddContactDialogFragment() : DialogFragment() {
             dismiss()
         }
     }
+
     override fun onDestroyView() {
         val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNav?.visibility = View.VISIBLE
