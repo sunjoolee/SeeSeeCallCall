@@ -73,7 +73,6 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
                 if (contact.favorite) R.drawable.icon_star_yellow
                 else R.drawable.icon_star_gray
             )
-
             profileImageView.run {
                 if (contact.profileImage != null)
                     setImageURI(contact.profileImage)
@@ -90,9 +89,7 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
 
                 clipToOutline = true
             }
-
             nameTextView.text = contact.name
-
             mbtiTextView.text = contact.mbti
             mbtiTextView.background.setTint(
                 getColor(
@@ -100,7 +97,6 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
                     MbtiManager.getCompatibilityColor(contact.mbti)
                 )
             )
-
             phoneNumberTextView.text = contact.phoneNumber
         }
     }

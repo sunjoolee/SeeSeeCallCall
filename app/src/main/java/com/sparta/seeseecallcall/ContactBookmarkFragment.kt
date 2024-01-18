@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.sparta.seeseecallcall.Constants.TAG_MY_BOOKMARK_ADAPTER
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
@@ -19,7 +20,6 @@ import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 class ContactBookmarkFragment : Fragment() {
 
     private val adapter by lazy { MyBookMarkAdapter(contactBookmarkList) }
-    private val TAG = "ContactBookmarkFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -54,20 +54,18 @@ class ContactBookmarkFragment : Fragment() {
             override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(text: Editable?) {
-                Log.d(TAG, "afterTextChanged, ${text.toString()}")
+                Log.d(TAG_MY_BOOKMARK_ADAPTER, "afterTextChanged, ${text.toString()}")
                 adapter.changeDataset(
                     if (text.isNullOrBlank()) contactBookmarkList
                     else getFilteredList(text.toString())
                 )
             }
         })
-
         return binding.root
     }
 
     override fun onResume(){
-        Log.d(TAG, "ContactBookmarkFragmentList onResume()")
-
+        Log.d(TAG_MY_BOOKMARK_ADAPTER, "ContactBookmarkFragmentList onResume()")
         adapter?.notifyDataSetChanged()
         super.onResume()
     }
