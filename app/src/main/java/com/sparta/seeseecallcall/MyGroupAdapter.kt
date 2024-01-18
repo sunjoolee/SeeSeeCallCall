@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.Constants.TAG_MY_GROUP_ADAPTER
 import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
 import com.sparta.seeseecallcall.data.ContactGroup
-import com.sparta.seeseecallcall.data.ContactGroupManager.contactGroupList
-import com.sparta.seeseecallcall.data.ContactManager
-import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
+import com.sparta.seeseecallcall.data.MyContactManager
 import com.sparta.seeseecallcall.databinding.RecyclerViewGroupItemBinding
 
-class MyGroupAdapter(private var groupDataset: List<ContactGroup>) :
+class MyGroupAdapter(private var groupDataset: MutableList<ContactGroup>) :
     RecyclerView.Adapter<MyGroupAdapter.MyGroupHolder>(),
     AddContactDialogFragment.OnAddContactListener {
 
@@ -54,11 +53,15 @@ class MyGroupAdapter(private var groupDataset: List<ContactGroup>) :
 
                 override fun onStarClick(view: View, contact:Contact) {
                     Log.d(TAG_MY_GROUP_ADAPTER, "on star click")
-                    ContactManager.toggleFavoriteContact(contact)
+                    ContactBookmarkManager.toggleFavoriteContact(contact)
                     onFavoriteChangeListener?.onFavoriteChanged()
                 }
             }
         }
+    }
+    fun changeDataset(newGroupDataset:MutableList<ContactGroup>){
+        groupDataset = newGroupDataset
+        notifyDataSetChanged()
     }
 
     override fun onAddContact() {
@@ -68,6 +71,7 @@ class MyGroupAdapter(private var groupDataset: List<ContactGroup>) :
 
     inner class MyGroupHolder(private val binding: RecyclerViewGroupItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val groupLayout = binding.layoutGroup
         val groupNameTextView = binding.tvGroupName
         val contactCountTextView = binding.tvContactCount
         val groupRecyclerView = binding.recyclerviewGroup

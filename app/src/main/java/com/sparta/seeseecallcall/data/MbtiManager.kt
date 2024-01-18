@@ -1,15 +1,13 @@
 package com.sparta.seeseecallcall.data
 
-import com.sparta.seeseecallcall.R
-
 object MbtiManager {
     val mbtiList:List<Mbti> = initMbtiList()
 
     fun getCompatibility(mbti:String): CompatibilityText{
-        if((mbti=="????")||(ContactManager.myContact.mbti == "????"))
+        if((mbti=="????")||(MyContactManager.myContact.mbti == "????"))
             return CompatibilityText.UN_KNOWN
 
-        val myMbti = mbtiList.find { it.type == ContactManager.myContact.mbti}!!
+        val myMbti = mbtiList.find { it.type == MyContactManager.myContact.mbti}!!
         if(myMbti.bestCompatibility.contains(mbti))  return CompatibilityText.BEST
         if(myMbti.goodCompatibility.contains(mbti))  return CompatibilityText.GOOD
         if(myMbti.sosoCompatibility.contains(mbti))  return CompatibilityText.SOSO

@@ -5,7 +5,7 @@ import com.sparta.seeseecallcall.getInitialSound
 
 object ContactGroupManager {
 
-    var contactGroupList: List<ContactGroup> = listOf<ContactGroup>(
+    var contactGroupList: MutableList<ContactGroup> = mutableListOf<ContactGroup>(
         ContactGroup("0-9", mutableListOf()),
         ContactGroup("ㄱ", mutableListOf<Contact>()),
         ContactGroup("ㄲ", mutableListOf<Contact>()),
@@ -60,12 +60,23 @@ object ContactGroupManager {
         }!!.contactList.add(newContact)
     }
 
-    fun deleteContact(contact:Contact){
-        if(contact.favorite)
-            ContactManager.contactBookmarkList.remove(contact)
+    fun deleteContactFromGroup(contact: Contact) {
         contactGroupList.find {
             it.groupName == getContactGroupName(contact)
         }!!.contactList.remove(contact)
+    }
+
+    fun getFilteredGroupList(searchText: String): MutableList<ContactGroup> {
+        val filteredGroupList = mutableListOf<ContactGroup>()
+        contactGroupList.forEach {
+            val filteredList = mutableListOf<Contact>()
+            it.contactList.forEach { contact ->
+                if ((contact.name.contains(searchText)) || (contact.mbti.contains(searchText.toUpperCase())))
+                    filteredList.add(contact)
+            }
+            filteredGroupList.add(ContactGroup(it.groupName, filteredList))
+        }
+        return filteredGroupList
     }
 
     private fun initContactList(): MutableList<Contact> = mutableListOf<Contact>(

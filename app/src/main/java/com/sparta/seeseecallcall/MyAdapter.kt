@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.sparta.seeseecallcall.Constants.TAG_MY_ADAPTER
-import com.sparta.seeseecallcall.data.CompatibilityColor
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
 

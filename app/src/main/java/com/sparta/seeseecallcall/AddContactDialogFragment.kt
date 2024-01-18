@@ -17,7 +17,6 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
 import com.sparta.seeseecallcall.data.ContactGroupManager
-import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar

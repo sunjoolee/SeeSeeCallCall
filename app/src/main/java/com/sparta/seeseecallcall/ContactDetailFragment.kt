@@ -22,7 +22,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.data.CompatibilityText
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
+import com.sparta.seeseecallcall.data.MyContactManager
 import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
 
@@ -86,7 +87,7 @@ class ContactDetailFragment : Fragment() {
         }
 
         binding.btnStar.setOnClickListener {
-            ContactManager.toggleFavoriteContact(contactData!!)
+            ContactBookmarkManager.toggleFavoriteContact(contactData!!)
             binding.imgStar.setImageResource(
                 if (contactData!!.favorite) R.drawable.icon_star_yellow
                 else R.drawable.icon_star_gray

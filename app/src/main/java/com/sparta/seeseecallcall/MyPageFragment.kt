@@ -1,26 +1,15 @@
 package com.sparta.seeseecallcall
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
-import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.data.MyContactManager
 import com.sparta.seeseecallcall.databinding.FragmentMyPageBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,7 +44,7 @@ class MyPageFragment : Fragment() {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_my_page, container, false)
         _binding = FragmentMyPageBinding.inflate(layoutInflater, container, false)
-        val mydata = ContactManager.myContact
+        val mydata = MyContactManager.myContact
         Log.d("MyPageFragment", "mydata = ${mydata.name}")
         binding?.tvMypageMBTI?.text = mydata.mbti
         binding?.tvMypageBirth?.text = mydata.birthDate

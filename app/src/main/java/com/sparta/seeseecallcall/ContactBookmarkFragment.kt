@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sparta.seeseecallcall.Constants.TAG_MY_BOOKMARK_ADAPTER
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager
-import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
+import com.sparta.seeseecallcall.data.ContactBookmarkManager.contactBookmarkList
 import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
@@ -45,7 +45,7 @@ class ContactBookmarkFragment : Fragment() {
                 //TODO 전화 인텐트 시작하기
             }
             override fun onStarClick(view: View, contact:Contact) {
-                ContactManager.toggleFavoriteContact(contact)
+                ContactBookmarkManager.toggleFavoriteContact(contact)
                 adapter?.notifyDataSetChanged()
             }
         }
