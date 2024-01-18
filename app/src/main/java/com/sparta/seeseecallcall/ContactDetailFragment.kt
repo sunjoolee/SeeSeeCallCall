@@ -17,13 +17,15 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sparta.seeseecallcall.Constants.TAG_DETAIL
 import com.sparta.seeseecallcall.data.CompatibilityText
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactBookmarkManager
-import com.sparta.seeseecallcall.data.MyContactManager
+import com.sparta.seeseecallcall.data.ContactGroupManager
 import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
 
@@ -31,11 +33,16 @@ interface OnFavoriteChangeListener {
     fun onFavoriteChanged()
 }
 
-class ContactDetailFragment : Fragment() {
+interface OnContactDeleteListener {
+    fun onContactDelete()
+}
+
+class ContactDetailFragment : Fragment(), ContactDeleteDialog.OnConfirmButtonClickedListener {
 
     private lateinit var binding: FragmentContactDetailBinding
     private var contactData: Contact? = null
     var onFavoriteChangeListener: OnFavoriteChangeListener? = null
+    var onContactDeleteListener: OnContactDeleteListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,26 +132,19 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun showDeleteDialog() {
-        val deleteDialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete, null)
-
-        val dialog = Dialog(requireContext())
-        dialog.setContentView(deleteDialogView)
-        dialog.setContentView(R.layout.dialog_delete)
-
-        val closeBtn = deleteDialogView.findViewById<Button>(R.id.btn_close)
-        val confirmBtn = deleteDialogView.findViewById<Button>(R.id.btn_confirm)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        closeBtn.setOnClickListener {
-            dialog.dismiss()
-        }
-        confirmBtn.setOnClickListener {
-
-        }
-
-        dialog.show()
+        Log.d(TAG_DETAIL, "show delete dialog")
+        val deleteDialog = ContactDeleteDialog(binding.root.context as AppCompatActivity)
+        deleteDialog.onConfirmButtonClickedListener = this@ContactDetailFragment
+        deleteDialog.show()
     }
+
+    override fun onConfirmButtonClicked() {
+        ContactBookmarkManager.deleteContactFromBookmark(contactData!!)
+        ContactGroupManager.deleteContactFromGroup(contactData!!)
+
+        activity?.supportFragmentManager?.popBackStack()
+    }
+
 
     private fun showMbtiDialog(mbti: String) {
         val mbtiDialogView =
