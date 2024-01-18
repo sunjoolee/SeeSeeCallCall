@@ -1,6 +1,10 @@
 package com.sparta.seeseecallcall
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Layout
@@ -9,7 +13,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.sparta.seeseecallcall.data.Contact
@@ -63,8 +70,53 @@ class MyPageFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding?.lyMypageinfor?.setOnClickListener {
+            showEditDialog()
+        }
+
 
         return binding?.root
+
+    }
+
+    private fun showEditDialog() {
+        val MypageInforBtn: ConstraintLayout? = binding?.lyMypageinfor
+        MypageInforBtn?.setOnClickListener {
+//            val builder = AlertDialog.Builder(requireContext())
+//
+//            val myPageInfor = layoutInflater.inflate(R.layout.fragment_add_contact_dialog, null)
+//            builder.setView(myPageInfor)
+//
+//            val listener = DialogInterface.OnClickListener{p0, p1 ->
+//                val alert = p0 as AlertDialog
+////                val mbtispinner: Spinner? = alert.findViewById<Spinner>(R.id.spinner_mbti)
+//                val nameinfor: EditText? = alert.findViewById<EditText>(R.id.et_name)
+//                val phonNumberInfor: EditText? = alert.findViewById<EditText>(R.id.et_phone_number)
+//                val emailInfor: EditText? = alert.findViewById<EditText>(R.id.et_email)
+//
+//                //binding.tvMypageMBTI.text = "${mbtispinner?.}"
+//                binding?.tvMypageName?.text = "${nameinfor?.text}"
+//                binding?.tvMypagePhon?.text = "${phonNumberInfor?.text}"
+//                binding?.tvMypageEmail?.text = "${emailInfor?.text}"
+//
+//            }
+//
+//            builder.setPositiveButton("",listener)
+//
+//            builder.show()
+
+            val addContactFragment = AddContactDialogFragmentMypage()
+            //addContactFragment.addContactListner = this@ContactListFragment
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .add(R.id.nav_host_fragment,addContactFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+//        binding?.lyMypageinfor?.setOnClickListener {
+////            AddContactDialogFragment()
+////        }
 
     }
 

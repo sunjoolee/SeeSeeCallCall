@@ -26,15 +26,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/icon_pencil"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
             android:id="@+id/img_MypageGradation"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -71,7 +62,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_MypageName" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ly_mypagegunghab"
+            android:id="@+id/ly_mypageinfor"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -85,8 +76,8 @@
                 android:layout_height="50dp"
                 android:background="@drawable/circle_shape"
                 android:backgroundTint="#8DBAFE"
-                android:padding="12dp"
-                android:src="@drawable/btn_gunghab"
+                android:padding="5dp"
+                android:src="@drawable/icon_pencil"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="궁합보기"
+                android:text="정보 수정"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -152,7 +143,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ly_mypagegunghab">
+            app:layout_constraintTop_toBottomOf="@+id/ly_mypageinfor">
 
             <TextView
                 android:layout_width="wrap_content"
