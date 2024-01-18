@@ -84,8 +84,7 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener {
             override fun afterTextChanged(text: Editable?) {
                 Log.d(TAG_LIST, "afterTextChanged, ${text.toString()}")
 
-                val adapter = binding.recyclerviewList.adapter as MyAdapter
-                adapter.changeDataset(
+               adapter.changeDataset(
                     if (text.isNullOrBlank()) contactList
                     else getFilteredList(text.toString())
                 )
@@ -103,11 +102,14 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener {
         }
     }
 
+    override fun onFavoriteChanged(contact: Contact) {
+        val changedPosition = contactList.indexOf(contact)
+        adapter.notifyItemChanged(changedPosition)
+    }
     override fun onResume(){
         Log.d(TAG_LIST, "ContactListFragmentList onResume()")
 
         adapter?.notifyDataSetChanged()
-        binding.recyclerviewList.adapter?.notifyDataSetChanged()
         super.onResume()
     }
 
@@ -123,8 +125,4 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener {
         }
     }
 
-    override fun onFavoriteChanged(contact: Contact) {
-        val changedPosition = contactList.indexOf(contact)
-        adapter.notifyItemChanged(changedPosition)
-    }
 }
