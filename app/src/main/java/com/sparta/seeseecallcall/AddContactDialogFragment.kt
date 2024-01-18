@@ -29,11 +29,11 @@ class AddContactDialogFragment() : DialogFragment() {
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
 
-    interface OnAddContactListner {
+    interface OnAddContactListener {
         fun onAddContact()
     }
 
-    var addContactListner: OnAddContactListner? = null
+    var addContactListner: OnAddContactListener? = null
 
     private var imageUri: Uri? = null
     private val imageIntentLauncher = registerForActivityResult(

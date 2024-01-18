@@ -16,14 +16,14 @@ import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
 
 interface OnFavoriteChangeListener {
-    fun onFavoriteChanged(contact: Contact)
+    fun onFavoriteChanged()
 }
 
 class ContactDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentContactDetailBinding
     private var contactData: Contact? = null
-    var listener: OnFavoriteChangeListener? = null
+    var onFavoriteChangeListener: OnFavoriteChangeListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,16 +75,12 @@ class ContactDetailFragment : Fragment() {
         }
 
         binding.lyStar.setOnClickListener {
-            contactData?.favorite = contactData?.favorite != true
-            Log.d(Constants.TAG, contactData?.favorite.toString())
-            if (contactData?.favorite == true) {
-                binding.imgStar.setImageResource(R.drawable.icon_star_yellow)
-                ContactManager.contactBookmarkList.add(contactData!!)
-            } else {
-                binding.imgStar.setImageResource(R.drawable.icon_star_gray)
-                ContactManager.contactBookmarkList.remove(contactData!!)
-            }
-            listener?.onFavoriteChanged(contactData!!)
+            ContactManager.toggleFavoriteContact(contactData!!)
+            binding.imgStar.setImageResource(
+                if (contactData!!.favorite) R.drawable.icon_star_yellow
+                else R.drawable.icon_star_gray
+            )
+            onFavoriteChangeListener?.onFavoriteChanged()
         }
 
         Log.d("받는 Detail 프래그먼트", contactData?.phoneNumber.toString())
