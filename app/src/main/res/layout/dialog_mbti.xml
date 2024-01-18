@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_margin="15dp"
+    android:background="@drawable/rounded_dialog_corners">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"/>
+
+    <ImageView
+        android:layout_width="123dp"
+        android:layout_height="116dp"
+        android:layout_gravity="center"
+        android:scaleType="fitStart"
+        android:src="@drawable/profile_istj" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISTJ"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="세상의 소금형"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한 번 시작한 일은 끝까지 해내는 사람들"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_shape_10"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 MBTI와의 궁합은 최악입니다."
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_shape_10"
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ISTJ 천생연분 궁합"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_shape_20"
+                android:backgroundTint="@color/mbti_best"
+                android:gravity="center"
+                android:text="ENTJ"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_shape_20"
+                android:backgroundTint="@color/mbti_best"
+                android:gravity="center"
+                android:text="ENTJ"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_shape_20"
+                android:backgroundTint="@color/mbti_best"
+                android:gravity="center"
+                android:text="ENTJ"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_shape_20"
+                android:backgroundTint="@color/mbti_best"
+                android:gravity="center"
+                android:text="ENTJ"
+                android:textColor="@color/white"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ISTJ 천생연분 궁합"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_good"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_good"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_good"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_good"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ISTJ 최악 궁합"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_bad"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_bad"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_bad"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_shape_20"
+                    android:backgroundTint="@color/mbti_bad"
+                    android:gravity="center"
+                    android:text="ENTJ"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <android.widget.Button
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_dialog_button"
+        android:backgroundTint="@color/gray"
+        android:text="닫기"
+        android:textColor="@color/white" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"/>
+</LinearLayout>
