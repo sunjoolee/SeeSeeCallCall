@@ -35,6 +35,18 @@ class MyGroupAdapter(private var groupDataset: MutableList<ContactGroup>) :
 
     override fun onBindViewHolder(holder: MyGroupHolder, position: Int) {
         holder.run {
+            if(groupDataset[position].contactList.isEmpty()) {
+                itemView.visibility = View.GONE
+                itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+            }
+            else{
+                itemView.visibility = View.VISIBLE
+                itemView.layoutParams = RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            }
+
             groupNameTextView.text = groupDataset[position].groupName
             contactCountTextView.text = groupDataset[position].contactList.size.toString() + "명"
 
