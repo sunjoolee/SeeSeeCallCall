@@ -70,7 +70,7 @@ object MbtiManager {
             long_description = "전체적인 부분을 조합하여 비전을 제시하는 사람들",
             bestCompatibility = listOf("ENFP", "ENTP"),
             goodCompatibility = listOf("INFP","INFJ","ENFJ","INTJ","ENTJ","INTP"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("ISFP", "ESFP","ISTP","ESTP","ISFJ","ESFJ","ISTJ","ESTJ"),
             badCompatibility = listOf()
         ),
         Mbti( //6. ENTJ
@@ -79,7 +79,7 @@ object MbtiManager {
             long_description = "비전을 가지고 사람들을 활력적으로 이끌어가는 사람들",
             bestCompatibility = listOf("INFP", "INTP"),
             goodCompatibility = listOf("ENFP","INFJ","ENFJ","INTJ","ENTJ","ENTP"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("ISFP","ESFP","ISTP","ESTP","ISFJ","ESFJ","ISTJ","ESTJ"),
             badCompatibility = listOf()
         ),
         Mbti( //7. INTP
@@ -88,7 +88,7 @@ object MbtiManager {
             long_description = "비평적인 관점을 가지고 있는 뛰어난 전략가들",
             bestCompatibility = listOf("ENTJ", "ESTJ"),
             goodCompatibility = listOf("INFP","ENFP","INFJ","INTJ","INTP","ENTP"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("ISFP","ESFP","ISTP","ESTP","ISFJ","ESFJ","ISTJ","ESTJ"),
             badCompatibility = listOf()
         ),
         Mbti( //8. ENTP
@@ -97,7 +97,7 @@ object MbtiManager {
             long_description = "풍부한 상상력을 가지고 새로운 것에 도전하는 사람들",
             bestCompatibility = listOf("INFJ", "INTJ"),
             goodCompatibility = listOf("INFP","ENFP","ENFJ","ENTJ","INTP","ENTP"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("ISFP","ESFP","ISTP","ESTP","ISFJ","ESFJ","ISTJ","ESTJ"),
             badCompatibility = listOf()
         ),
         Mbti( //9. ISFP
@@ -106,7 +106,7 @@ object MbtiManager {
             long_description = "따뜻한 감성을 가지고 있는 겸손한 사람들",
             bestCompatibility = listOf("ENTJ", "ESFJ", "ESTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ISFJ","ISTJ"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ")
         ),
         Mbti( //10. ESFP
@@ -115,7 +115,7 @@ object MbtiManager {
             long_description = "분위기를 고조시키는 우호적 사람들",
             bestCompatibility = listOf("ISFJ", "ISTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ESFJ","ESTJ"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //11. ISTP
@@ -124,7 +124,7 @@ object MbtiManager {
             long_description = "논리적이고 뛰어난 상황 적응력을 가지고 있는 사람들",
             bestCompatibility = listOf("ESFJ", "ESTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ISFJ","ISTJ",),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //12. ESTP
@@ -133,7 +133,7 @@ object MbtiManager {
             long_description = "친구, 운동, 음식 등 다양한 활동을 선호하는 사람들",
             bestCompatibility = listOf("ISFJ", "ISTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ESFJ","ESTJ"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //13. ISFJ
@@ -142,7 +142,7 @@ object MbtiManager {
             long_description = "성실하고 온화하며 협조를 잘하는 사람들",
             bestCompatibility = listOf("ESFP", "ESTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ISTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //14. ESFJ
@@ -151,7 +151,7 @@ object MbtiManager {
             long_description = "친절과 현실감을 바탕으로 타인에게 봉사하는 사람들",
             bestCompatibility = listOf("ISFP", "ISTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ESFP","ESTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //15. ISTJ
@@ -160,7 +160,7 @@ object MbtiManager {
             long_description = "한번 시작한 일은 끝까지 해내는 사람들",
             bestCompatibility = listOf("ESFP", "ESTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ISTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //16. ESTJ
@@ -169,7 +169,7 @@ object MbtiManager {
             long_description = "사무적, 실용적, 현실적으로 일을 많이하는 사람들",
             bestCompatibility = listOf("ISFP", "ISTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf(),
+            sosoCompatibility = listOf("INTJ","ENGJ","ENTP","ESFP","ESTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
     )
