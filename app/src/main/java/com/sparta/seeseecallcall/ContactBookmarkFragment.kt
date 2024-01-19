@@ -1,6 +1,8 @@
 package com.sparta.seeseecallcall
 
+import android.content.Intent
 import android.os.Bundle
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -42,7 +44,8 @@ class ContactBookmarkFragment : Fragment() {
 
         adapter.itemClick = object : ItemClick{
             override fun onClick(view: View, contact:Contact) {
-                //TODO 전화 인텐트 시작하기
+                val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:${contact.phoneNumber}"))
+                startActivity(intent)
             }
             override fun onStarClick(view: View, contact:Contact) {
                 ContactBookmarkManager.toggleFavoriteContact(contact)
