@@ -79,7 +79,7 @@
             android:gravity="center"
             android:text="ENTP"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/palette_secondary"
             app:layout_constraintBottom_toBottomOf="@+id/tv_Detailname"
             app:layout_constraintEnd_toStartOf="@+id/tv_Detailname"
             app:layout_constraintTop_toTopOf="@+id/tv_Detailname" />

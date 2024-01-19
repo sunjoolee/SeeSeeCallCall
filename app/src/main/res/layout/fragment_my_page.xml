@@ -58,7 +58,7 @@
                 android:backgroundTint="#FE54BA"
                 android:gravity="center"
                 android:text="ENTJ"
-                android:textColor="@color/white"
+                android:textColor="@color/palette_secondary"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_MypageName"
                 app:layout_constraintEnd_toStartOf="@+id/tv_MypageName"
                 app:layout_constraintTop_toTopOf="@+id/tv_MypageName" />
