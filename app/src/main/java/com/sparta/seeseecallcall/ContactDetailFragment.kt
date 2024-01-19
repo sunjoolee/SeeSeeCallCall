@@ -138,7 +138,7 @@ class ContactDetailFragment : Fragment(), ContactDeleteDialog.OnConfirmButtonCli
         }
         //전화걸기
         binding.lyCall.setOnClickListener {
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse(contactData?.phoneNumber))
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel: "+ contactData?.phoneNumber))
             startActivity(intent)
         }
     }
