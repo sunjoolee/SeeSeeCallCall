@@ -1,5 +1,7 @@
 package com.sparta.seeseecallcall
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,65 +15,55 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sparta.seeseecallcall.Constants.TAG_LIST
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
-import com.sparta.seeseecallcall.data.ContactManager.contactList
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
+import com.sparta.seeseecallcall.data.ContactBookmarkManager.contactBookmarkList
+import com.sparta.seeseecallcall.data.ContactGroupManager
+import com.sparta.seeseecallcall.data.ContactGroupManager.contactGroupList
 import com.sparta.seeseecallcall.databinding.FragmentContactListBinding
 
-class ContactListFragment : Fragment(), OnFavoriteChangeListener, AddContactDialogFragment.OnAddContactListner {
+class ContactListFragment : Fragment(),
+    OnStartDetailListener,
+    OnFavoriteChangeListener,
+    OnContactDeleteListener{
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter by lazy { MyAdapter(contactList) }
+    private val favoriteAdapter by lazy { MyAdapter(contactBookmarkList) }
+    private val groupAdapter by lazy { MyGroupAdapter(contactGroupList) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-        binding.recyclerviewList.adapter = adapter
-        binding.recyclerviewList.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewList.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayout.VERTICAL
-            )
-        )
-
-        adapter.itemClick = object : MyAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-                Log.d(Constants.TAG_LIST, "position: $position")
-
-                val contactData = contactList[position]
-                val contactDetailFragment = ContactDetailFragment.newInstance(contactData)
-                Log.d("보내는 Detail 프래그먼트", contactList[position].mbti)
-
-                contactDetailFragment.listener = this@ContactListFragment
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment, contactDetailFragment)
-                    .addToBackStack(null)
-                    .commit()
-
+        //즐겨찾기 리싸이클러뷰 설정
+        binding.tvFavoriteContactCount.text = contactBookmarkList.size.toString() + "명"
+        binding.recyclerviewFavorite.run{
+            adapter = favoriteAdapter
+            layoutManager= LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+        }
+        favoriteAdapter.itemClick = object :ItemClick{
+            override fun onClick(view: View, contact: Contact) {
+                startContactDetailFragment(contact)
             }
 
-            override fun onStarClick(view: View, position: Int) {
-                Log.d(Constants.TAG, contactList[position].favorite.toString())
-                contactList[position].run {
-                    favorite = !favorite
-                    if (favorite) {
-                        contactBookmarkList.add(this)
-                        contactList[position].favorite = true
-                    }
-                    else {
-                        contactBookmarkList.remove(this)
-                        contactList[position].favorite = false
-                    }
-                }
-                contactBookmarkList.sortBy { it.name }
-                adapter.notifyDataSetChanged()
+            override fun onStarClick(view: View, contact: Contact) {
+                ContactBookmarkManager.toggleFavoriteContact(contact)
+                onFavoriteChanged()
             }
+
         }
 
+        //연락처 그룹 리싸이클러뷰 설정
+        groupAdapter.onStartDetailListener = this@ContactListFragment
+        groupAdapter.onFavoriteChangeListener = this@ContactListFragment
+        binding.recyclerviewList.run {
+            adapter = groupAdapter
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+        }
         return binding.root
     }
 
@@ -84,9 +76,15 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener, AddContactDial
             override fun afterTextChanged(text: Editable?) {
                 Log.d(TAG_LIST, "afterTextChanged, ${text.toString()}")
 
-               adapter.changeDataset(
-                    if (text.isNullOrBlank()) contactList
-                    else getFilteredList(text.toString())
+                //즐겨찾기 리싸이클러뷰 검색 결과 필터링하기
+               favoriteAdapter.changeDataset(
+                    if (text.isNullOrBlank()) contactBookmarkList
+                    else ContactBookmarkManager.getFilteredList(text.toString())
+                )
+                //연락처 그룹 리싸이클러뷰 검색 결과 필터링하기
+                groupAdapter.changeDataset(
+                    if (text.isNullOrBlank()) contactGroupList
+                    else ContactGroupManager.getFilteredGroupList(text.toString())
                 )
             }
         })
@@ -95,41 +93,51 @@ class ContactListFragment : Fragment(), OnFavoriteChangeListener, AddContactDial
             Log.d(TAG_LIST, "floating action button clicked")
 
             val addContactFragment = AddContactDialogFragment()
-            addContactFragment.addContactListner = this@ContactListFragment
+            addContactFragment.addContactListner = groupAdapter
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .add(R.id.nav_host_fragment,addContactFragment)
+                .add(R.id.nav_host_fragment, addContactFragment)
                 .addToBackStack(null)
                 .commit()
         }
     }
 
-    override fun onFavoriteChanged(contact: Contact) {
-        val changedPosition = contactList.indexOf(contact)
-        adapter.notifyItemChanged(changedPosition)
+    override fun onStartDetail(contact: Contact) {
+       startContactDetailFragment(contact)
     }
 
-    override fun onAddContact() {
-        Log.d(TAG_LIST, "ContactListFragmentList onAddContact")
-        adapter?.notifyDataSetChanged()
+    private fun startContactDetailFragment(contact: Contact){
+        val contactDetailFragment = ContactDetailFragment.newInstance(contact)
+
+        contactDetailFragment.onFavoriteChangeListener = this@ContactListFragment
+        contactDetailFragment.onContactDeleteListener = this@ContactListFragment
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, contactDetailFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
-    override fun onResume(){
+    override fun onFavoriteChanged() {
+        Log.d(Constants.TAG_LIST, "on favorite changed")
+        refreshRecyclerViews()
+    }
+
+    override fun onContactDelete() {
+        Log.d(Constants.TAG_LIST, "on contact delete")
+        refreshRecyclerViews()
+    }
+
+
+    override fun onResume() {
         Log.d(TAG_LIST, "ContactListFragmentList onResume()")
-        adapter?.notifyDataSetChanged()
+        refreshRecyclerViews()
         super.onResume()
     }
 
-    private fun getFilteredList(searchText: String): MutableList<Contact> {
-        val filteredList = mutableListOf<Contact>()
-        return filteredList.apply {
-            contactList.forEach {
-                //이름으로 검색
-                if (it.name.contains(searchText)) add(it)
-                //mbti로 검색
-                if (it.mbti.contains(searchText.toUpperCase())) add(it)
-            }
-        }
+    private fun refreshRecyclerViews(){
+        binding.tvFavoriteContactCount.text = contactBookmarkList.size.toString() + "명"
+        favoriteAdapter?.notifyDataSetChanged()
+        groupAdapter?.notifyDataSetChanged()
     }
 
 }

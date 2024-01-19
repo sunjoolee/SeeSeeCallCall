@@ -16,24 +16,23 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
-import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.data.ContactGroupManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class AddContactDialogFragment() : DialogFragment() {
+interface OnAddContactListener {
+    fun onAddContact()
+}
 
+class AddContactDialogFragment() : DialogFragment() {
 
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
 
-    interface OnAddContactListner {
-        fun onAddContact()
-    }
-
-    var addContactListner: OnAddContactListner? = null
+    var addContactListner: OnAddContactListener? = null
 
     private var imageUri: Uri? = null
     private val imageIntentLauncher = registerForActivityResult(
@@ -223,7 +222,7 @@ class AddContactDialogFragment() : DialogFragment() {
                 }
             }
 
-            ContactManager.addNewContact(
+            ContactGroupManager.addNewContact(
                 profileImage = imageUri,
                 name = binding.etName.text.toString(),
                 mbti = binding.spinnerMbti.selectedItem.toString(),

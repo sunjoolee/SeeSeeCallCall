@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="search_bar">이름/MBTI 검색</string>
+    <string name="favorites">즐겨찾기</string>
 
     <string name="mbti">MBTI</string>
     <string name="name">이름</string>

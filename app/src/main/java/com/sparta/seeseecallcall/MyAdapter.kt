@@ -8,20 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
-import com.sparta.seeseecallcall.data.CompatibilityColor
+import com.sparta.seeseecallcall.Constants.TAG_MY_ADAPTER
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.RecyclerViewItemBinding
 
-
+interface ItemClick {
+    fun onClick(view: View, contact:Contact)
+    fun onStarClick(view: View,contact: Contact)
+}
 class MyAdapter(private var dataset: MutableList<Contact>) :
     RecyclerView.Adapter<MyAdapter.MyHolder>() {
-
-    interface ItemClick {
-        fun onClick(view: View, position: Int)
-        fun onStarClick(view: View, position: Int)
-    }
 
     var itemClick: ItemClick? = null
 
@@ -38,10 +35,12 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            itemClick?.onClick(holder.itemView, holder.adapterPosition)
+            Log.d(TAG_MY_ADAPTER,"on click")
+            itemClick?.onClick(holder.itemView, dataset[holder.adapterPosition])
         }
         holder.starImageView.setOnClickListener {
-            itemClick?.onStarClick(holder.itemView, holder.adapterPosition)
+            Log.d(TAG_MY_ADAPTER,"on star click")
+            itemClick?.onStarClick(holder.itemView, dataset[holder.adapterPosition])
         }
 
         bind(holder, position)
@@ -70,7 +69,6 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
                 if (contact.favorite) R.drawable.icon_star_yellow
                 else R.drawable.icon_star_gray
             )
-
             profileImageView.run {
                 if (contact.profileImage != null)
                     setImageURI(contact.profileImage)
@@ -87,9 +85,7 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
 
                 clipToOutline = true
             }
-
             nameTextView.text = contact.name
-
             mbtiTextView.text = contact.mbti
             mbtiTextView.background.setTint(
                 getColor(
@@ -97,7 +93,6 @@ class MyAdapter(private var dataset: MutableList<Contact>) :
                     MbtiManager.getCompatibilityColor(contact.mbti)
                 )
             )
-
             phoneNumberTextView.text = contact.phoneNumber
         }
     }

@@ -20,23 +20,32 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sparta.seeseecallcall.Constants.TAG_DETAIL
+import com.sparta.seeseecallcall.data.CompatibilityText
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
+import com.sparta.seeseecallcall.data.ContactGroupManager
 import com.sparta.seeseecallcall.data.MbtiManager
 import com.sparta.seeseecallcall.databinding.FragmentContactDetailBinding
 
 interface OnFavoriteChangeListener {
-    fun onFavoriteChanged(contact: Contact)
+    fun onFavoriteChanged()
 }
 
-class ContactDetailFragment : Fragment() {
+interface OnContactDeleteListener {
+    fun onContactDelete()
+}
+
+class ContactDetailFragment : Fragment(), ContactDeleteDialog.OnConfirmButtonClickedListener {
 
     private lateinit var binding: FragmentContactDetailBinding
     private var contactData: Contact? = null
-    var listener: OnFavoriteChangeListener? = null
+    var onFavoriteChangeListener: OnFavoriteChangeListener? = null
+    var onContactDeleteListener: OnContactDeleteListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,19 +106,13 @@ class ContactDetailFragment : Fragment() {
         }
 
         binding.btnStar.setOnClickListener {
-            contactData?.favorite = contactData?.favorite != true
-            Log.d(Constants.TAG, contactData?.favorite.toString())
-            if (contactData?.favorite == true) {
-                binding.imgStar.setImageResource(R.drawable.icon_star_yellow)
-                ContactManager.contactBookmarkList.add(contactData!!)
-            } else {
-                binding.imgStar.setImageResource(R.drawable.icon_star_gray)
-                ContactManager.contactBookmarkList.remove(contactData!!)
-            }
-            listener?.onFavoriteChanged(contactData!!)
+            ContactBookmarkManager.toggleFavoriteContact(contactData!!)
+            binding.imgStar.setImageResource(
+                if (contactData!!.favorite) R.drawable.icon_star_yellow
+                else R.drawable.icon_star_gray
+            )
+            onFavoriteChangeListener?.onFavoriteChanged()
         }
-
-        Log.d("받는 Detail 프래그먼트", contactData?.phoneNumber.toString())
 
         binding.imgBackBtn.setOnClickListener {
             requireFragmentManager().popBackStack()
@@ -119,9 +122,9 @@ class ContactDetailFragment : Fragment() {
             showDeleteDialog()
         }
 
-        binding.btnGunghab.setOnClickListener{
+        binding.btnGunghab.setOnClickListener {
             Log.d("보내는 mbti", contactData?.mbti.toString())
-            if(contactData?.mbti == "????")
+            if (contactData?.mbti == "????")
                 showMysteryMbtiDialog()
             else
                 showMbtiDialog(contactData?.mbti.toString())
@@ -130,41 +133,35 @@ class ContactDetailFragment : Fragment() {
         //메세지 보내기
         binding.lyChat.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
-            val phonnumber = contactData?.phoneNumber
-            intent.data = Uri.parse("smsto:${phonnumber}")
+            intent.data = Uri.parse("smsto:${contactData?.phoneNumber}")
             startActivity(intent)
         }
         //전화걸기
         binding.lyCall.setOnClickListener {
-            val phonnumber = contactData?.phoneNumber
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse(phonnumber))
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse(contactData?.phoneNumber))
             startActivity(intent)
         }
     }
 
     private fun showDeleteDialog() {
-        val deleteDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete, null)
-
-        val dialog = Dialog(requireContext())
-        dialog.setContentView(deleteDialogView)
-        dialog.setContentView(R.layout.dialog_delete)
-
-        val closeBtn = deleteDialogView.findViewById<Button>(R.id.btn_close)
-        val confirmBtn = deleteDialogView.findViewById<Button>(R.id.btn_confirm)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        closeBtn.setOnClickListener {
-            dialog.dismiss()
-        }
-        confirmBtn.setOnClickListener {
-
-        }
-
-        dialog.show()
+        Log.d(TAG_DETAIL, "show delete dialog")
+        val deleteDialog = ContactDeleteDialog(binding.root.context as AppCompatActivity)
+        deleteDialog.onConfirmButtonClickedListener = this@ContactDetailFragment
+        deleteDialog.show()
     }
 
+    override fun onConfirmButtonClicked() {
+        ContactBookmarkManager.deleteContactFromBookmark(contactData!!)
+        ContactGroupManager.deleteContactFromGroup(contactData!!)
+        onContactDeleteListener?.onContactDelete()
+
+        activity?.supportFragmentManager?.popBackStack()
+    }
+
+
     private fun showMbtiDialog(mbti: String) {
-        val mbtiDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
+        val mbtiDialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti, null)
         val typeImage = mbtiDialogView.findViewById<ImageView>(R.id.iv_type)
         val type = mbtiDialogView.findViewById<TextView>(R.id.tv_mbti)
         val shortDesc = mbtiDialogView.findViewById<TextView>(R.id.tv_short_desc)
@@ -190,7 +187,7 @@ class ContactDetailFragment : Fragment() {
         Log.d("받는 mbti", mbti)
         val dialogMbti = MbtiManager.mbtiList.find { it.type == mbti }
         Log.d("변환한 mbti", dialogMbti.toString())
-        dialogMbti?.let{ mbti->
+        dialogMbti?.let { mbti ->
             type.text = mbti.type
             shortDesc.text = mbti.short_description
             longDesc.text = mbti.long_description

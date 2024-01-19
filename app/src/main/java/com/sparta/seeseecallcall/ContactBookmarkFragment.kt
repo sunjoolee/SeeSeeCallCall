@@ -11,15 +11,15 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.sparta.seeseecallcall.Constants.TAG_MY_BOOKMARK_ADAPTER
 import com.sparta.seeseecallcall.data.Contact
-import com.sparta.seeseecallcall.data.ContactManager.contactBookmarkList
-import com.sparta.seeseecallcall.data.ContactManager.contactList
+import com.sparta.seeseecallcall.data.ContactBookmarkManager
+import com.sparta.seeseecallcall.data.ContactBookmarkManager.contactBookmarkList
 import com.sparta.seeseecallcall.databinding.FragmentContactBookmarkBinding
 
 class ContactBookmarkFragment : Fragment() {
 
     private val adapter by lazy { MyBookMarkAdapter(contactBookmarkList) }
-    private val TAG = "ContactBookmarkFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -40,18 +40,13 @@ class ContactBookmarkFragment : Fragment() {
         binding.recyclerviewBookmark.adapter = adapter
         binding.recyclerviewBookmark.layoutManager = GridLayoutManager(context, 2)
 
-
-        adapter.itemClick = object : MyBookMarkAdapter.ItemClick{
-            override fun onClick(view: View, position: Int) {
-                Log.d(TAG, "position: $position")
-                //TODO 연락처 객체 넘기며, 연락처 상세 페이지로 이동
+        adapter.itemClick = object : ItemClick{
+            override fun onClick(view: View, contact:Contact) {
+                //TODO 전화 인텐트 시작하기
             }
-            override fun onStarClick(view: View, position: Int) {
-                contactList.find { it === contactBookmarkList[position] }?.run{
-                    favorite = !favorite
-                }
-                contactBookmarkList.removeAt(position)
-                adapter.notifyItemRemoved(position)
+            override fun onStarClick(view: View, contact:Contact) {
+                ContactBookmarkManager.toggleFavoriteContact(contact)
+                adapter.notifyDataSetChanged()
             }
         }
 
@@ -59,20 +54,18 @@ class ContactBookmarkFragment : Fragment() {
             override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(text: Editable?) {
-                Log.d(TAG, "afterTextChanged, ${text.toString()}")
+                Log.d(TAG_MY_BOOKMARK_ADAPTER, "afterTextChanged, ${text.toString()}")
                 adapter.changeDataset(
                     if (text.isNullOrBlank()) contactBookmarkList
                     else getFilteredList(text.toString())
                 )
             }
         })
-
         return binding.root
     }
 
     override fun onResume(){
-        Log.d(TAG, "ContactBookmarkFragmentList onResume()")
-
+        Log.d(TAG_MY_BOOKMARK_ADAPTER, "ContactBookmarkFragmentList onResume()")
         adapter?.notifyDataSetChanged()
         super.onResume()
     }
