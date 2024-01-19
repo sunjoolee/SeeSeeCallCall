@@ -43,7 +43,7 @@ class ContactDetailFragment : Fragment() {
         arguments?.let {
             contactData = it.getParcelable(Constants.ARG_CONTACT)
         }
-        Log.d("받는 Detail 프래그먼트", contactData?.phoneNumber.toString())
+        Log.d("받는 Detail 프래그먼트", contactData.toString())
     }
 
     override fun onCreateView(
@@ -63,7 +63,7 @@ class ContactDetailFragment : Fragment() {
         arguments?.let {
             contactData = it.getParcelable(Constants.ARG_CONTACT)
         }
-
+        Log.d("받는 Detail 프래그먼트2", contactData?.mbti.toString())
         contactData?.let { data ->
             binding.imgDetailprofil.run {
                 if (data.profileImage != null) setImageURI(data.profileImage)
