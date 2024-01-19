@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="380dp"
-    android:layout_height="500dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="5dp"
     android:layout_margin="10dp"
@@ -23,7 +23,7 @@
                 android:layout_width="123dp"
                 android:layout_height="116dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="12dp"
                 android:scaleType="fitStart"
                 android:clipToOutline="true"
                 android:background="@drawable/rounded_shape_20"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="ISTJ"
                 android:textColor="@color/white"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="세상의 소금형"
                 android:textColor="@color/white"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>

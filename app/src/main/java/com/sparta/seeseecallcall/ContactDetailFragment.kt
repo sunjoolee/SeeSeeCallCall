@@ -2,12 +2,14 @@ package com.sparta.seeseecallcall
 
 import android.app.Dialog
 import android.content.Context
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -21,7 +23,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.sparta.seeseecallcall.data.CompatibilityText
 import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.ContactManager
 import com.sparta.seeseecallcall.data.MbtiManager
@@ -42,7 +43,7 @@ class ContactDetailFragment : Fragment() {
         arguments?.let {
             contactData = it.getParcelable(Constants.ARG_CONTACT)
         }
-        Log.d("받는 Detail 프래그먼트", contactData?.phoneNumber.toString())
+        Log.d("받는 Detail 프래그먼트", contactData.toString())
     }
 
     override fun onCreateView(
@@ -62,7 +63,7 @@ class ContactDetailFragment : Fragment() {
         arguments?.let {
             contactData = it.getParcelable(Constants.ARG_CONTACT)
         }
-
+        Log.d("받는 Detail 프래그먼트2", contactData?.mbti.toString())
         contactData?.let { data ->
             binding.imgDetailprofil.run {
                 if (data.profileImage != null) setImageURI(data.profileImage)
@@ -80,6 +81,15 @@ class ContactDetailFragment : Fragment() {
             binding.tvDetailPhon.text = data.phoneNumber
             binding.tvDetailEmail.text = data.email
             binding.tvDetailBirth.text = data.birthDate
+
+            binding.tvDetailMBTI.background.setTint(
+                ContextCompat.getColor(
+                    requireContext(),
+                    MbtiManager.getCompatibilityColor(data.mbti)
+                )
+            )
+
+            Log.d("mbti1",data.mbti)
             if (contactData?.favorite == true)
                 binding.imgStar.setImageResource(R.drawable.icon_star_yellow)
             else
@@ -170,6 +180,7 @@ class ContactDetailFragment : Fragment() {
         val tvGood = mbtiDialogView.findViewById<TextView>(R.id.tv_good)
         val tvBad = mbtiDialogView.findViewById<TextView>(R.id.tv_bad)
 
+
         val dialog = Dialog(requireContext())
         dialog.setContentView(mbtiDialogView)
 
@@ -196,15 +207,7 @@ class ContactDetailFragment : Fragment() {
             val compatibility = MbtiManager.getCompatibility(mbti.type)
             val compatibilityText = getString(compatibility.textId)
 
-            //TODO 궁합 색 바꾸는 부분
-            val colorResId = when(compatibilityText) {
-                CompatibilityText.BEST.toString() -> R.color.mbti_best
-                CompatibilityText.GOOD.toString() -> R.color.mbti_good
-                CompatibilityText.BAD.toString() -> R.color.mbti_bad
-                else -> R.color.gray
-            }
-            compability.setTextColor(ContextCompat.getColor(requireContext(), colorResId))
-            compability.text = getString(R.string.mbti_compatibility, compatibilityText)
+            applyColorToCompatibilityText(compability, compatibilityText)
 
             // 최고 궁합 처리
             if (mbti.bestCompatibility.isEmpty()) {
@@ -271,19 +274,20 @@ class ContactDetailFragment : Fragment() {
 
     private fun showMysteryMbtiDialog() {
         val mysteryDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_mbti_default, null)
-        val compability = mysteryDialogView.findViewById<TextView>(R.id.tv_compability)
+        val compability = mysteryDialogView.findViewById<TextView>(R.id.tv_default_compability)
+        val typeImage = mysteryDialogView.findViewById<ImageView>(R.id.iv_type)
+        typeImage.setImageResource(R.drawable.profile_mbti)
+        typeImage.clipToOutline = true
 
         val dialog = Dialog(requireContext())
         dialog.setContentView(mysteryDialogView)
-        dialog.setContentView(R.layout.dialog_mbti_default)
 
         val closeBtn = mysteryDialogView.findViewById<Button>(R.id.btn_close)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val compatibility = MbtiManager.getCompatibility("????")
         val compatibilityText = getString(compatibility.textId)
-        Log.d("compatibilityTexti", compatibilityText)
         compability.text = getString(R.string.mbti_compatibility, compatibilityText)
-
+        applyColorToCompatibilityText(compability, compatibilityText)
 
         closeBtn.setOnClickListener {
             dialog.dismiss()
@@ -292,6 +296,32 @@ class ContactDetailFragment : Fragment() {
         dialog.show()
     }
 
+    private fun applyColorToCompatibilityText(textView: TextView, compatibilityText: String) {
+        val formattedText = getString(R.string.mbti_compatibility, compatibilityText)
+        val spannableString = SpannableString(formattedText)
+        val colorResId = when (compatibilityText) {
+            "천생연분" -> R.color.mbti_best
+            "좋음" -> R.color.mbti_good
+            "무난" -> R.color.mbti_soso
+            "최악" -> R.color.mbti_bad
+            else -> R.color.gray
+        }
+        val color = ContextCompat.getColor(requireContext(), colorResId)
+
+        // 궁합 텍스트에만 색상 적용
+        val startIndex = formattedText.indexOf(compatibilityText)
+        if (startIndex >= 0) {
+            spannableString.setSpan(
+                ForegroundColorSpan(color),
+                startIndex,
+                startIndex + compatibilityText.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        // TextView에 SpannableString 설정
+        textView.text = spannableString
+    }
 
 
     override fun onDestroyView() {
