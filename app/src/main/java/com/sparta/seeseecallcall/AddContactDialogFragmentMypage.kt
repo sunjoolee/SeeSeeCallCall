@@ -1,6 +1,7 @@
 package com.sparta.seeseecallcall
 
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
+import com.sparta.seeseecallcall.data.Contact
 import com.sparta.seeseecallcall.data.MyContactManager
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
 
@@ -34,6 +36,8 @@ class AddContactDialogFragmentMypage() : DialogFragment() {
 
         initCancelButton()
         initOkayButton()
+
+        binding.etPhoneNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
     }
 
     private fun initProfileImageButton() {
@@ -110,16 +114,15 @@ class AddContactDialogFragmentMypage() : DialogFragment() {
                 }
             }
 
-            MyContactManager.myContact.name
-            MyContactManager.myContact.phoneNumber
-            MyContactManager.myContact.mbti
-//                profileImage = null, //TODO 프로필 사진 등록
-//                name = binding.etName.text.toString(),
-//                mbti = binding.spinnerMbti.selectedItem.toString(),
-//                phoneNumber = binding.etPhoneNumber.text.toString(),
-//                email = binding.etEmail.text.toString(),
-//                birthDate = "0000/00/00" //TODO 생일 등록
-//            )
+            val newMyContact = Contact(
+                profileImage = null,
+                name = binding.etName.text.toString(),
+                mbti = binding.spinnerMbti.selectedItem.toString(),
+                phoneNumber = binding.etPhoneNumber.text.toString(),
+                email = binding.etEmail.text.toString(),
+                birthDate = "0000/00/00"
+            )
+            MyContactManager.myContact = newMyContact
             dismiss()
         }
     }
