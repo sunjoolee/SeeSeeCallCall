@@ -153,7 +153,7 @@ object MbtiManager {
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //15. ISTJ
-            type="ISFJ",
+            type="ISTJ",
             short_description = "세상의 소금형",
             long_description = "한번 시작한 일은 끝까지 해내는 사람들",
             bestCompatibility = listOf("ESFP", "ESTP"),
