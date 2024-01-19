@@ -63,7 +63,7 @@
             <LinearLayout
                 android:id="@+id/layout_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_shape_10"
@@ -82,19 +82,19 @@
 
                 <EditText
                     android:id="@+id/et_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:hint="@string/enter_name"
                     android:textColor="@color/palette_text"
                     android:textColorHint="@color/palette_text"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_phone_number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_shape_10"
@@ -113,20 +113,20 @@
 
                 <EditText
                     android:id="@+id/et_phone_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:hint="@string/enter_phone_number"
                     android:inputType="phone"
                     android:textColor="@color/palette_text"
                     android:textColorHint="@color/palette_text"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_shape_10"
@@ -145,14 +145,14 @@
 
                 <EditText
                     android:id="@+id/et_email"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:hint="@string/enter_email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/palette_text"
                     android:textColorHint="@color/palette_text"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -202,12 +202,13 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cancel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/gray"
+                android:background="@drawable/rounded_dialog_button"
                 android:text="@string/cancel"
-                android:textColor="@color/palette_bg"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_ok"
@@ -217,10 +218,11 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_ok"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:backgroundTint="@color/palette_accent"
                 android:text="@string/ok"
-                android:textColor="@color/palette_bg"
+                android:background="@drawable/rounded_dialog_button"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_cancel"

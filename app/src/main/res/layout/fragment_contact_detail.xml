@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#24293D">
+        android:background="@color/palette_bg">
 
 
         <ImageView
@@ -64,7 +64,6 @@
             android:text="차은우"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/img_detailprofil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -120,7 +119,6 @@
                     android:text="메세지"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/img_chat"
                     app:layout_constraintStart_toStartOf="@+id/img_chat"
                     app:layout_constraintTop_toBottomOf="@id/img_chat" />
@@ -154,7 +152,6 @@
                     android:text="통화"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/img_call"
                     app:layout_constraintStart_toStartOf="@+id/img_call"
                     app:layout_constraintTop_toBottomOf="@+id/img_call" />
@@ -189,7 +186,6 @@
                     android:text="궁합보기"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/img_gunghab"
                     app:layout_constraintStart_toStartOf="@+id/img_gunghab"
                     app:layout_constraintTop_toBottomOf="@+id/img_gunghab" />
@@ -197,10 +193,12 @@
 
             <LinearLayout
                 android:id="@+id/ln_tell"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_shape_20"
+                android:background="@drawable/rounded_shape_10"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,27 +212,24 @@
                     android:layout_marginTop="10dp"
                     android:text="전화번호"
                     android:textColor="#8DBAFE"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_DetailPhon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="010-1234-1234"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    style="@style/EditTextStyle"
+                    android:text="010-1234-1234" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ln_email"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_shape_20"
+                android:background="@drawable/rounded_shape_10"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -248,7 +243,7 @@
                     android:layout_marginTop="10dp"
                     android:text="이메일"
                     android:textColor="#8DBAFE"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -256,19 +251,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
                     android:text="abcde@gmail.com"
                     android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ln_birth"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_shape_20"
+                android:background="@drawable/rounded_shape_10"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -282,7 +279,7 @@
                     android:layout_marginTop="10dp"
                     android:text="생년월일"
                     android:textColor="#8DBAFE"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -290,10 +287,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
                     android:text="1997 / 03 / 30 "
                     android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
@@ -302,6 +299,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ln_birth">
