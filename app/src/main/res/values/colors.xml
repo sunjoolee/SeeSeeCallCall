@@ -10,8 +10,8 @@
     <color name="mbti_soso">#F1DA68</color>
     <color name="mbti_bad">#C62D2D</color>
 
-    <color name="palette_bg">#24293D</color>
+    <color name="palette_bg">#1D2131</color>
     <color name="palette_accent">#8DBAFE</color>
     <color name="palette_text">#F3F3FB</color>
-    <color name="palette_secondary">#2F3855</color>
+    <color name="palette_secondary">#252E4A</color>
 </resources>

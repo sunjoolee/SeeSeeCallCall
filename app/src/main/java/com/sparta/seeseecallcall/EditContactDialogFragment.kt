@@ -13,30 +13,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.marginBottom
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sparta.seeseecallcall.Constants.TAG_ADD_CONTACT
-import com.sparta.seeseecallcall.data.ContactGroupManager
+import com.sparta.seeseecallcall.data.Contact
+import com.sparta.seeseecallcall.data.MyContactManager
+import com.sparta.seeseecallcall.data.MyContactManager.myContact
 import com.sparta.seeseecallcall.databinding.FragmentAddContactDialogBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-interface OnAddContactListener {
-    fun onAddContact()
-}
+class EditContactDialogFragment() : DialogFragment() {
+    interface OnEditContactListener{
+        fun onEditContact()
+    }
 
-class AddContactDialogFragment() : DialogFragment() {
 
     private var _binding: FragmentAddContactDialogBinding? = null
     private val binding get() = _binding!!
 
-    var addContactListner: OnAddContactListener? = null
+    var onEditContactListener:OnEditContactListener? = null
 
-    private var imageUri: Uri? = null
+
+    var imageUri:Uri? = null
     private val imageIntentLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -75,6 +79,8 @@ class AddContactDialogFragment() : DialogFragment() {
 
         initCancelButton()
         initOkayButton()
+
+        initUI() //myContact 정보 UI에 그리기
 
         binding.etPhoneNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
     }
@@ -146,7 +152,6 @@ class AddContactDialogFragment() : DialogFragment() {
                 }
             }
     }
-
     private fun initBirthDateDialog() {
         binding.tvBirthDate.setOnClickListener {
             val cal = Calendar.getInstance()
@@ -207,36 +212,65 @@ class AddContactDialogFragment() : DialogFragment() {
             Log.d(TAG_ADD_CONTACT, "ok button clicked")
 
             //유효성 검사
-            with(getNameError(binding.etName.text.toString())) {
+            with(getNameError(binding.etName.text.toString())){
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
                 }
             }
-            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())) {
+            with(getPhoneNumberError(binding.etPhoneNumber.text.toString())){
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
                 }
             }
-            with(getEmailError(binding.etEmail.text.toString())) {
+            with(getEmailError(binding.etEmail.text.toString())){
                 if (this != ErrorMsg.PASS) {
                     binding.tvError.setText(this.id)
                     return@setOnClickListener
                 }
             }
 
-            ContactGroupManager.addNewContact(
-                profileImage = imageUri,
+            val newContact = Contact(
+                profileImage =  imageUri,
                 name = binding.etName.text.toString(),
                 mbti = binding.spinnerMbti.selectedItem.toString(),
                 phoneNumber = binding.etPhoneNumber.text.toString(),
                 email = binding.etEmail.text.toString(),
                 birthDate = binding.tvBirthDate.text.toString()
             )
-            addContactListner?.onAddContact()
 
+            MyContactManager.myContact = newContact
+            onEditContactListener?.onEditContact()
             dismiss()
+        }
+    }
+
+    private fun initUI(){
+        myContact.run{
+            if(profileImage != null){
+               binding.imgProfile.setImageURI(profileImage)
+               imageUri = profileImage
+            }
+            else{
+                binding.imgProfile.setImageResource(
+                    if (mbti == "????") R.drawable.profile_mbti
+                    else resources.getIdentifier(
+                    "profile_${mbti.toLowerCase(Locale.ROOT)}",
+                    "drawable",
+                    "com.sparta.seeseecallcall"
+                    )
+                )
+            }
+            binding.imgProfile.clipToOutline = true
+
+            val mbtiArray = resources.getStringArray(R.array.spinner_mbti)
+            binding.spinnerMbti.setSelection(mbtiArray.indexOf(mbti))
+
+            binding.etName.setText(name)
+            binding.etPhoneNumber.setText(phoneNumber)
+            binding.etEmail.setText(email)
+            binding.tvBirthDate.text = birthDate
         }
     }
 
@@ -245,4 +279,5 @@ class AddContactDialogFragment() : DialogFragment() {
         bottomNav?.visibility = View.VISIBLE
         super.onDestroyView()
     }
+
 }

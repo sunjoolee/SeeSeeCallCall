@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="80dp"
+    android:background="@color/palette_bg"
     tools:context=".MyPageFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#24293D">
+        android:layout_marginBottom="80dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#24293D">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/img_Mypageprofil"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:background="#AFC5DD"
+                android:scaleType="centerCrop"
                 android:src="@drawable/profile_iu"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -207,6 +207,8 @@
                 android:layout_width="350dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/rounded_shape_20"
                 android:backgroundTint="#2F3855"
                 android:orientation="vertical"
