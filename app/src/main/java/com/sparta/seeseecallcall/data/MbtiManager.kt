@@ -169,6 +169,6 @@ object MbtiManager {
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
             sosoCompatibility = listOf("INTJ","ENTJ","ENTP","ESFP","ESTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
-        ),
+        )
     )
 }
