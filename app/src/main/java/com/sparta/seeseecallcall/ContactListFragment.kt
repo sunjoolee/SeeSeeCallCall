@@ -89,6 +89,10 @@ class ContactListFragment : Fragment(),
             }
         })
 
+        binding.layoutFavorite.setOnClickListener {
+            binding.nestedScrollView.smoothScrollTo(0,0)
+        }
+
         binding.floatingBtn.setOnClickListener {
             Log.d(TAG_LIST, "floating action button clicked")
 
