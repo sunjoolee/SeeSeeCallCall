@@ -104,7 +104,7 @@ object MbtiManager {
             long_description = "따뜻한 감성을 가지고 있는 겸손한 사람들",
             bestCompatibility = listOf("ENTJ", "ESFJ", "ESTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ISFJ","ISTJ"),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ISFJ","ISTJ"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ")
         ),
         Mbti( //10. ESFP
@@ -113,7 +113,7 @@ object MbtiManager {
             long_description = "분위기를 고조시키는 우호적 사람들",
             bestCompatibility = listOf("ISFJ", "ISTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ESFJ","ESTJ"),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ESFJ","ESTJ"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //11. ISTP
@@ -122,7 +122,7 @@ object MbtiManager {
             long_description = "논리적이고 뛰어난 상황 적응력을 가지고 있는 사람들",
             bestCompatibility = listOf("ESFJ", "ESTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ISFJ","ISTJ",),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ISFJ","ISTJ",),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //12. ESTP
@@ -131,7 +131,7 @@ object MbtiManager {
             long_description = "친구, 운동, 음식 등 다양한 활동을 선호하는 사람들",
             bestCompatibility = listOf("ISFJ", "ISTJ"),
             goodCompatibility = listOf(),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ESFJ","ESTJ"),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ISFP","ESFP","ISTP","ESTP","ESFJ","ESTJ"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //13. ISFJ
@@ -140,7 +140,7 @@ object MbtiManager {
             long_description = "성실하고 온화하며 협조를 잘하는 사람들",
             bestCompatibility = listOf("ESFP", "ESTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ISTP"),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ISFP","ISTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //14. ESFJ
@@ -149,7 +149,7 @@ object MbtiManager {
             long_description = "친절과 현실감을 바탕으로 타인에게 봉사하는 사람들",
             bestCompatibility = listOf("ISFP", "ISTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ESFP","ESTP"),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ESFP","ESTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //15. ISTJ
@@ -158,7 +158,7 @@ object MbtiManager {
             long_description = "한번 시작한 일은 끝까지 해내는 사람들",
             bestCompatibility = listOf("ESFP", "ESTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf("INTJ","ENGJ","INTP","ENTP","ISFP","ISTP"),
+            sosoCompatibility = listOf("INTJ","ENTJ","INTP","ENTP","ISFP","ISTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
         Mbti( //16. ESTJ
@@ -167,7 +167,7 @@ object MbtiManager {
             long_description = "사무적, 실용적, 현실적으로 일을 많이하는 사람들",
             bestCompatibility = listOf("ISFP", "ISTP"),
             goodCompatibility = listOf("ISFJ", "ESFJ", "ISTJ", "ESTJ"),
-            sosoCompatibility = listOf("INTJ","ENGJ","ENTP","ESFP","ESTP"),
+            sosoCompatibility = listOf("INTJ","ENTJ","ENTP","ESFP","ESTP"),
             badCompatibility = listOf("INFP", "ENFP", "INFJ", "ENFJ")
         ),
     )
