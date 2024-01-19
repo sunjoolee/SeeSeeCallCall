@@ -76,7 +76,6 @@ class AddContactDialogFragment() : DialogFragment() {
         initCancelButton()
         initOkayButton()
 
-
         binding.etPhoneNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
     }
 

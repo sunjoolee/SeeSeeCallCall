@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +81,8 @@ class EditContactDialogFragment() : DialogFragment() {
         initOkayButton()
 
         initUI() //myContact 정보 UI에 그리기
+
+        binding.etPhoneNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
     }
 
     private fun initProfileImageButton() {
