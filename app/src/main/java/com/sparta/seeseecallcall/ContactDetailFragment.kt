@@ -201,6 +201,14 @@ class ContactDetailFragment : Fragment(), ContactDeleteDialog.OnConfirmButtonCli
             )
             typeImage.clipToOutline = true
 
+            applyColorToCompatibilityText(tvBest, mbti.type)
+            applyColorToCompatibilityText(tvGood, mbti.type)
+            applyColorToCompatibilityText(tvBad, mbti.type)
+
+            tvBest.text = getString(R.string.best_compatibility_text, mbti.type)
+            tvGood.text = getString(R.string.compatibility_good_text, mbti.type)
+            tvBad.text = getString(R.string.compatibility_bad_text, mbti.type)
+
             val compatibility = MbtiManager.getCompatibility(mbti.type)
             val compatibilityText = getString(compatibility.textId)
 
