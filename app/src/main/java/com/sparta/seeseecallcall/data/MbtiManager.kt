@@ -40,7 +40,7 @@ object MbtiManager {
             short_description = "스파크형",
             long_description = "열정적으로 새로운 관계를 만드는 사람들",
             bestCompatibility = listOf("INFJ", "INTJ"),
-            goodCompatibility = listOf("INFP","ENFP","ENFJ","INTP","ENTP"),
+            goodCompatibility = listOf("INFP","ENFP","ENFJ","INTP","ENTP","ENTJ"),
             sosoCompatibility = listOf(),
             badCompatibility = listOf("ISFP","ESFP","ISTP","ESTP","ISFJ","ESFJ","ISTJ","ESTJ")
         ),
