@@ -1,5 +1,22 @@
+<a href="https://github.com/nbCampGroup-2-24-01-15/ColorContacts/actions/new">
+      <img alt="Tests Passing" src="https://github.com/SeeSeeCallCall/SeeSeeCallCall?style=flat&logo=kotlin&logoColor=white&color=800080" />
+    </a>
+    <a href="https://github.com/nbCampGroup-2-24-01-15/ColorContacts/commits/dev/">
+      <img alt="Tests Coverage" src="https://img.shields.io/github/commit-activity/m/nbCampGroup-2-24-01-15/ColorContacts" />
+    </a>
+    <a href="https://github.com/nbCampGroup-2-24-01-15/ColorContacts/graphs/contributors">
+      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/nbCampGroup-2-24-01-15/ColorContacts" />
+    </a>
+    <a href="https://github.com/nbCampGroup-2-24-01-15/ColorContacts/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/nbCampGroup-2-24-01-15/ColorContacts?color=yellow" />
+    </a>
+    <a href="https://github.com/nbCampGroup-2-24-01-15/ColorContacts/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/nbCampGroup-2-24-01-15/ColorContacts?color=red" />
+    </a>
+    
 # 📞시시콜콜 (SeeSeeCallCall)
 친구들의 MBTI를 보고(See), 통화(Call)할 수 있는 연락처 어플
+
 
 ## 🎯Developers
 
