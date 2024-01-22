@@ -1,3 +1,62 @@
 <resources>
     <string name="app_name">SeeSeeCallCall</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="search_bar">이름/MBTI 검색</string>
+    <string name="favorites">즐겨찾기</string>
+
+    <string name="mbti">MBTI</string>
+    <string name="name">이름</string>
+    <string name="phone_number">전화번호</string>
+    <string name="email">이메일</string>
+    <string name="birth_date">생일</string>
+    <string name="default_birth_date">\????/??/??</string>
+
+    <string name="enter_name">이름을 입력해주세요.</string>
+    <string name="enter_phone_number">전화번호를 입력해주세요.</string>
+    <string name="enter_email">이메일을 입력해주세요.</string>
+
+    <string name="pass"></string>
+    <string name="error_no_name">이름이 입력되지 않았습니다.</string>
+    <string name="error_no_phone_number">전화번호가 입력되지 않았습니다.</string>
+    <string name="error_wrong_phone_number">전화번호 형식이 맞지 않습니다.</string>
+    <string name="error_no_email">이메일이 입력되지 않았습니다.</string>
+    <string name="error_wrong_email">이메일 형식이 맞지 않습니다.</string>
+
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="close">닫기</string>
+
+    <string-array name="spinner_mbti">
+        <item>\????</item>
+        <item>INFP</item>
+        <item>ENFP</item>
+        <item>INFJ</item>
+        <item>ENFJ</item>
+        <item>INTJ</item>
+        <item>ENTJ</item>
+        <item>INTP</item>
+        <item>ENTP</item>
+        <item>ISFP</item>
+        <item>ESFP</item>
+        <item>ISTP</item>
+        <item>ESTP</item>
+        <item>ISFJ</item>
+        <item>ESFJ</item>
+        <item>ISTJ</item>
+        <item>ESTJ</item>
+    </string-array>
+
+    <string name="compatibility_best">천생연분</string>
+    <string name="compatibility_good">좋음</string>
+    <string name="compatibility_soso">무난</string>
+    <string name="compatibility_bad">최악</string>
+    <string name="compatibility_unknown">알수없음</string>
+
+    <string name="mbti_compatibility">내 MBTI와의 궁합은\n%1$s 입니다.</string>
+    <string name="best_compatibility_text">%1$s 천생연분 궁합</string>
+    <string name="compatibility_good_text">%1$s 좋은 궁합</string>
+    <string name="compatibility_bad_text">%1$s 최악 궁합</string>
+
 </resources>

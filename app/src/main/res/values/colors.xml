@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#818181</color>
+    <color name="red">#C62D2D</color>
+
+    <color name="mbti_best">#FE54BA</color>
+    <color name="mbti_good">#6CB67E</color>
+    <color name="mbti_soso">#F1DA68</color>
+    <color name="mbti_bad">#C62D2D</color>
+
+    <color name="palette_bg">#1D2131</color>
+    <color name="palette_accent">#8DBAFE</color>
+    <color name="palette_text">#F3F3FB</color>
+    <color name="palette_secondary">#252E4A</color>
 </resources>

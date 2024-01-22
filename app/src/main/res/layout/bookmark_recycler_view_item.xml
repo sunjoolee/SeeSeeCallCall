@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="30dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="178dp"
+        android:background="@color/palette_secondary">
+
+
+        <ImageView
+            android:id="@+id/img_profile"
+            android:layout_width="116dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_shape_10"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/img_star"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_star"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/profile_mbti" />
+
+        <ImageView
+            android:id="@+id/img_star"
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_star_yellow" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="54dp"
+            android:layout_height="31dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="홍길동"
+            android:textColor="@color/palette_text"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_mbti"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+        <TextView
+            android:id="@+id/tv_mbti"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_shape_10"
+            android:backgroundTint="@color/gray"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="\?\?\?\?"
+            android:textColor="@color/palette_secondary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile"
+            app:layout_constraintVertical_bias="0.4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
